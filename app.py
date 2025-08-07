@@ -96,7 +96,7 @@ def send_otp(email, otp, reset=False):
                     <p>This OTP is valid for the next 10 minutes. If you did not request this, please ignore this email.</p>
                     <div class="footer">
                         &copy; {datetime.now().year} Unsent Letters. All rights reserved.<br>
-                        <a href="https://www.unsentletters.com">Visit our website</a> for more information.
+                        <a href="https://unsentletters.onrender.com/">Visit our website</a> for more information.
                     </div>
                 </div>
             </body>
@@ -151,7 +151,7 @@ def send_otp(email, otp, reset=False):
                     <p>This OTP is valid for the next 10 minutes. If you did not request this, please ignore this email.</p>
                     <div class="footer">
                         &copy; {datetime.now().year} Unsent Letters. All rights reserved.<br>
-                        <a href="https://www.unsentletters.com">Visit our website</a> for more information.
+                        <a href="https://unsentletters.onrender.com/">Visit our website</a> for more information.
                     </div>
                 </div>
             </body>
@@ -510,7 +510,7 @@ def send_account_deletion_email(email):
                 <p>If this was a mistake, you can always re-register and start anew.</p>
                 <div class="footer">
                     &copy; {datetime.now().year} Unsent Letters. All rights reserved.<br>
-                    <a href="https://www.unsentletters.com">Visit our website</a> for more information.
+                    <a href="https://unsentletters.onrender.com/">Visit our website</a> for more information.
                 </div>
             </div>
         </body>
