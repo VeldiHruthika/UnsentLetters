@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>The Pages of You</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@500;600&display=swap');
+
+    body {
+      font-family: 'Cormorant Garamond', serif;
+      background: radial-gradient(circle, rgba(0,0,0,1) 0%, rgba(58,20,35,1) 100%);
+      background-size: cover;
+      color: #e4d7b9;
+      padding: 60px 20px;
+      overflow-x: hidden;
+      animation: fadeIn 1s ease-out;
+       margin: 0;
+    min-height: 100vh; /* Ensure the body takes the full height */
+  display: block; /* Revert to block layout */
+  padding-bottom: 250px;
+    }
+
+   
+
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    .profile-box {
+  max-width: 600px;
+  margin: auto;
+  background: linear-gradient(to bottom, #2b0e1a, #1c0d13); /* Deep, dark gradient */
+  padding: 30px;
+  border-radius: 22px;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.25),
+              inset 0 0 60px rgba(176, 140, 105, 0.2);
+  border: 3px double #b78c5e;
+  position: relative;
+  background-image: url('https://www.transparenttextures.com/patterns/dark-wood.png'); /* Dark wood texture */
+  background-blend-mode: overlay;
+  transition: all 0.3s ease;
+}
+
+.profile-box:hover {
+  box-shadow: 0 18px 48px rgba(0,0,0,0.45);
+}
+
+    .profile-box h2 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 42px;
+      text-align: center;
+      color: #f8cba7;
+      margin-bottom: 10px;
+      animation: slideIn 0.8s ease-out;
+    }
+
+    @keyframes slideIn {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(0); }
+    }
+
+    .profile-box p {
+      font-size: 18px;
+      margin: 10px 0;
+      text-align: center;
+      color: #f1d0a4;
+    }
+
+    .profile-box img {
+      display: block;
+      margin: 0 auto 15px;
+      border: 5px solid #d4b06f;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+      border-radius: 50%;
+      width: 130px;
+      height: 130px;
+      transition: all 0.3s ease;
+    }
+
+    .profile-box img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .profile-actions a {
+      display: block;
+      margin: 16px auto;
+      padding: 12px 20px;
+      max-width: 360px;
+      text-align: center;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 17px;
+      color: #f2e0d6;
+      background: radial-gradient(circle at top left, #7a4a2f, #5a2d19);
+      border-radius: 14px;
+      box-shadow: inset 0 0 10px rgba(255, 230, 200, 0.3),
+                  0 4px 10px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    .profile-actions a:hover {
+      transform: translateY(-3px);
+      box-shadow: inset 0 0 20px rgba(255, 200, 150, 0.4),
+                  0 6px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    button {
+      background: linear-gradient(to bottom, #674631, #442f20);
+      color: #fef7e9;
+      padding: 10px 18px;
+      border: none;
+      border-radius: 10px;
+      font-weight: 500;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #3a2618;
+    }
+
+    h3 {
+      font-size: 22px;
+      text-align: center;
+      margin-top: 40px;
+      color: #d79f5a;
+      font-weight: 600;
+    }
+
+    #burnChart {
+      display: block;
+      margin: 30px auto;
+      max-width: 360px;
+    }
+
+    ul#email-history {
+      list-style-type: square;
+      padding-left: 30px;
+      margin-top: 15px;
+      font-size: 16px;
+      color: #f1d0a4;
+    }
+
+    ul#email-history li a {
+      color: #d69f65;
+      font-weight: bold;
+      text-decoration: underline dotted;
+    }
+
+    ul#email-history li a:hover {
+      color: #f1d0a4;
+    }
+
+    div[text-align="center"] a button,
+    form button {
+      font-size: 16px;
+      font-family: 'Cormorant Garamond', serif;
+      margin: 8px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+      border: 1px solid #3b2b22;
+      padding: 9px 16px;
+      background: radial-gradient(circle at top left, #5a3827, #3a2415);
+      color: #fff5e8;
+      transition: all 0.3s ease;
+    }
+
+    div[text-align="center"] a button:hover,
+    form button:hover {
+      background: #2c1c10;
+      box-shadow: 0 5px 12px rgba(0,0,0,0.3);
+      transform: scale(1.03);
+    }
+
+    .footer {
+    background: #2b0e1a;
+  color: #f1d0a4;
+  text-align: center;
+  padding: 20px;
+  font-size: 14px;
+  border-top: 2px solid #b78c5e;
+  width: 100%;
+  position: fixed; /* Fixed position at the bottom */
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 30px; /* Ensure enough padding inside the footer */
+}
+  .footer p {
+    margin: 5px 0;
+  }
+
+  .footer-links,
+  .footer-contact,
+  .footer-social-links {
+    margin: 10px 0;
+  }
+
+  .footer a {
+    color: #d69f65;
+    text-decoration: none;
+    margin: 0 10px;
+  }
+
+  .footer a:hover {
+    color: #f8cba7;
+  }
+
+  .footer-social-links a {
+    margin: 0 15px;
+  }
+  /* Add media queries for mobile screen sizes */
+@media only screen and (max-width: 425px) {
+  .footer {
+    font-size: 12px;
+    padding: 10px;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer .footer-links a {
+    font-size: 12px;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .footer-contact p {
+    font-size: 12px;
+  }
+
+  .footer-social-links a {
+    font-size: 12px;
+    margin: 0 10px;
+  }
+
+  .cta button {
+    padding: 12px 20px;
+    font-size: 16px;
+  }
+}
+
+@media only screen and (max-width: 375px) {
+  body {
+    padding-bottom: 200px;  /* Adjust padding for 375px screens */
+  }
+
+  .cta button {
+    padding: 10px 20px;  /* Further reduce button padding */
+    font-size: 14px;  /* Adjust font size */
+  }
+
+  .footer {
+    font-size: 10px;  /* Minimal font size */
+    padding: 6px 10px; /* Smaller padding */
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer .footer-links a {
+    font-size: 10px;  /* Even smaller font size for links */
+    margin: 0 4px 3px 4px;  /* Tightened margin */
+    display: inline-block;
+  }
+
+  .footer-contact p {
+    font-size: 9px;  /* Reduced font size for contact info */
+    margin: 1px 0;
+  }
+
+  .footer-social-links a {
+    font-size: 9px;  /* Reduced font size for social links */
+    margin: 0 4px;  /* Reduced margin */
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  .footer {
+    font-size: 8px;  /* Maintain small font size */
+    padding: 2px 6px;  /* Consistent padding for small screens */
+    flex-direction: column;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .footer .footer-links a {
+    font-size: 8px;
+    margin: 0 2px 1px 2px;  /* Even tighter margin between links */
+    display: inline-block;
+  }
+
+  .footer-contact p {
+    font-size: 8px;
+    margin: 1px 0;  /* Even less margin */
+  }
+
+  .footer-social-links a {
+    font-size: 8px;
+    margin: 0 2px;  /* Reduced gap between social links */
+  }
+
+  .cta button {
+    padding: 4px 8px;  /* Smaller button padding */
+    font-size: 8px;  /* Smaller button font size */
+  }
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="profile-box">
+    <img id="profile-avatar" src="{{ url_for('custom_static', filename='avatars/' + (data.avatar if data.avatar else 'default_avatar.png')) }}" alt="Profile Avatar" style="width: 120px; height: 120px; border-radius: 50%;">
+
+    <h2>🖋️ Your Profile</h2>
+    <p><strong>Email:</strong> 
+  {% if session['email'] %}
+    {{ session['email'] }}
+  {% else %}
+    <span style="color: red; font-weight: bold; font-size: 18px; background-color: yellow; padding: 5px;">Not logged in. Please register and verify your OTP.</span>
+  {% endif %}
+</p>
+
+
+    <div class="profile-actions">
+      <a href="/choose-avatar">🧿 Choose Your Soul (Profile Picture)</a>
+      <a href="/saved-letters-page">📜 View Saved Letters</a>
+      <a href="/timecapsule" class="capsule-link">⏳ Write a Time Capsule</a>
+      <a href="/burnt-letters">🔥 View Burnt Letters</a>
+      <a href="/frontend/index.html">✍ Back to Writing</a>
+    </div>
+  </div>
+
+  <hr><br>
+
+  <div style="max-width: 400px; margin: 0 auto;">
+    <h3>📊 Burnt vs Saved Letters</h3>
+    <canvas id="burnChart"></canvas>
+  </div>
+
+  <hr><br>
+
+  <p><strong>Email:</strong> <span id="user-email">loading...</span></p>
+  <h3>📧 Previously Logged-in Emails:</h3>
+  <ul id="email-history"></ul>
+
+  <!-- Action Buttons -->
+  <div style="text-align: center; margin-top: 30px;">
+    <a href="/logout"><button>🚪 Log Out</button></a>
+    <a href="/login"><button style="background:#888;">🔑 Login</button></a>
+    <a href="/register"><button style="background:#aaa;">🧾 Register</button></a>
+
+    <form action="/delete-account" method="POST" style="display:inline;">
+      <button type="submit"
+              onclick="return confirm('Are you sure you want to delete your account? This action is irreversible!')"
+              style="margin-left: 10px; background: crimson;">
+        ❌ Delete My Account
+      </button>
+    </form>
+  </div>
+  <!-- Footer Section -->
+  <footer class="footer">
+    <p>&copy; 2025 Unsent Letters. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="frontend/about_us.html">About Us</a> |
+      <a href="frontend/privacy.html">Privacy Policy</a> |
+      <a href="frontend/terms_service.html">Terms of Service</a>
+    </div>
+    <div class="footer-contact">
+      <p>Contact us at: <a href="mailto:hruthika.veldi123@gmail.com">hruthika.veldi123@gmail.com</a> | Call: +91 8328015334</p>
+    </div>
+    <div class="footer-social-links">
+      <!-- Add your social media links here -->
+      <a href="https://www.instagram.com" target="_blank">Instagram</a> |
+      <a href="https://www.twitter.com" target="_blank">Twitter</a> |
+      <a href="https://www.facebook.com" target="_blank">Facebook</a>
+    </div>
+  </footer>
+
+  <!-- JS: Fetch and Render -->
+  <script>
+    fetch('/get-user')
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('user-email').textContent = data.email || 'Unknown';
+        if (data.avatar) {
+          document.getElementById('profile-avatar').src = `/assets/avatars/${data.avatar}`;
+        }
+
+        const historyList = document.getElementById('email-history');
+        if (data.history && Array.isArray(data.history)) {
+          data.history.forEach(email => {
+            const li = document.createElement('li');
+            const a = document.createElement('a');
+            a.href = `/login?email=${encodeURIComponent(email)}`;
+            a.textContent = email;
+            li.appendChild(a);
+            historyList.appendChild(li);
+          });
+        }
+      });
+  </script>
+
+  <script>
+    fetch('/letter-analytics')
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('totalSaved').textContent = data.total_saved || 0;
+        document.getElementById('commonMood').textContent = data.most_common_mood || 'None';
+      });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    fetch('/burn-vs-saved')
+      .then(res => res.json())
+      .then(data => {
+        const ctx = document.getElementById('burnChart').getContext('2d');
+        new Chart(ctx, {
+          type: 'pie',
+          data: {
+            labels: ['🔥 Burnt', '📦 Saved'],
+            datasets: [{
+              data: [data.burnt || 0, data.saved || 0],
+              backgroundColor: ['#e25d44', '#7dbf8e'],
+              borderColor: ['#fff', '#fff'],
+              borderWidth: 1
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: {
+              legend: {
+                position: 'bottom'
+              }
+            }
+          }
+        });
+      });
+  </script>
+</body>
+</html>

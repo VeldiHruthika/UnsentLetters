@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Whispers of the Heart</title>
+  <link rel="stylesheet" href="style.css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+
+
+  <!-- Google Fonts for Font Selection -->
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Dancing+Script&family=Great+Vibes&family=IM+Fell+English+SC&family=Libre+Baskerville&family=Satisfy&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=VT323&family=Courier+Prime&family=Cutive+Mono&family=IBM+Plex+Mono&family=Dancing+Script&family=Great+Vibes&family=Satisfy&family=Alex+Brush&family=Cedarville+Cursive&family=IM+Fell+English+SC&family=Cinzel+Decorative&family=UnifrakturCook&family=Playfair+Display&family=Cormorant+Garamond&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Allura&family=Arizonia&family=Calligraffitti&family=Caveat&family=Cinzel&family=Dancing+Script&family=Great+Vibes&family=Herr+Von+Muellerhoff&family=Homemade+Apple&family=Just+Me+Again+Down+Here&family=La+Belle+Aurore&family=Meddon&family=Nanum+Pen+Script&family=Parisienne&family=Patrick+Hand&family=Petit+Formal+Script&family=Playball&family=Rouge+Script&family=Sail&family=Satisfy&family=Special+Elite&family=Tangerine&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Lobster&family=Sacramento&family=Dancing+Script&family=Great+Vibes&family=Satisfy&family=Parisienne&family=Cookie&family=Quicksand&family=Cinzel&family=Berkshire+Swash&family=Zilla+Slab&family=Allura&family=Playfair+Display&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Merriweather&family=Roboto+Slab&family=Lora&family=Cormorant+Unicase&family=Sacramento&family=Sirin+Stencil&family=Arvo&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Lobster+Two&family=Courgette&family=Della+Respira&family=Montez&family=Allura&family=Tisa&family=Rouge+Script&family=Great+Vibes&display=swap" rel="stylesheet" />
+  <style>
+  /* Viewport & Zoom Fix */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  font-family: 'Georgia', serif;
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  html, body {
+  overscroll-behavior: none;
+}
+
+}
+/* Container Layout */
+.container {
+  flex: 1;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  scroll-padding-bottom: 100px;
+  -webkit-overflow-scrolling: touch;
+   max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 1rem;
+  height: calc(100vh - 60px);
+  scrollbar-width: thin;
+  scrollbar-color: #5d3922 #2e2b2b;
+  .container {
+  background-color: rgba(0, 0, 0, 0.85); /* semi-transparent dark */
+  position: relative;
+  z-index: 2;
+}
+
+}
+
+.container > * {
+  margin-bottom: 1rem;
+}
+
+.container::-webkit-scrollbar {
+  width: 12px;
+}
+.container::-webkit-scrollbar-thumb {
+ background: linear-gradient(to bottom, #5d3922, #3b2418);
+  border-radius: 10px;
+  border: 2px solid #1e1e1e;
+  box-shadow: 0 0 6px #a87a4a;
+}
+.container::-webkit-scrollbar-track {
+  background: #1e1e1e;
+  border-radius: 10px;
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.4);
+}
+body::-webkit-scrollbar,
+.container::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 12px;
+}
+
+/* WebKit Scroll Thumb */
+body::-webkit-scrollbar-thumb,
+.container::-webkit-scrollbar-thumb {
+  background-color: #5d3922;
+  border-radius: 10px;
+  border: 2px solid #1e1e1e;
+  box-shadow: 0 0 6px #a87a4a;
+}
+
+/* WebKit Scroll Track */
+body::-webkit-scrollbar-track,
+.container::-webkit-scrollbar-track {
+  background: #1e1e1e;
+  border-radius: 10px;
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.4);
+}
+
+/* Background & Colors */
+body {
+  background: radial-gradient(circle, rgba(0,0,0,1) 0%, rgba(58,20,35,1) 100%);
+  color: #f2e0c6;
+  display: flex;
+  flex-direction: column;
+  transition: background 0.3s ease;
+}
+
+/* Headings */
+h1, h2, h3 {
+  color: #e4c2a1;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+/* Header + Logo */
+.unsent-header {
+  background-color: #120e0c;
+  flex-wrap: nowrap;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  border-bottom: 1px solid #19120e;
+}
+
+.logo-area {
+  display: flex;
+  align-items: center;
+ justify-content: center;
+  gap: 12px;
+  flex-grow: 1;
+  flex-shrink: 1;
+  min-width: 0;
+ /* max-width: calc(100% - 60px); /* Leave room for toggle button */
+  overflow: hidden;
+  max-width: calc(100% - 60px);
+}
+.unsent-logo {
+  height: 60px;
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+.site-title {
+  font-family: 'Cinzel Decorative', serif;
+  color: #e4c2a1;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+  white-space: normal;
+  overflow: hidden;
+  border-right: 2px solid #e4c2a1;
+  display: inline-block;
+  font-size: clamp(1.4rem, 6vw, 2.4rem);
+  width: 0;
+  animation:
+    typingEffect 5s steps(17, end) forwards, /* Adjust typing speed and steps */
+    flameGlow 1.2s ease-in-out infinite;
+}
+
+
+
+/* Sidebar Styling */
+.sidebar, .font-sidebar {
+  position: fixed;
+  right: 20px;
+  top: 60px;
+  width: 240px;
+  max-height: 80vh;
+  overflow-y: auto;
+  background: rgba(0, 0, 0, 0.85); /* Dark base */
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5); /* Stronger shadow for depth */
+  border-radius: 16px;
+  padding: 14px 12px;
+  display: none;
+  z-index: 1000;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  
+}
+.sidebar.visible {
+  display: block;
+}
+
+/* Sidebar Toggle Button */
+.sidebar-toggle, .font-sidebar-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  font-size: 20px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #7e4b3b;
+  color: #fff3e6;
+  z-index: 2000;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.sidebar-toggle:hover, .font-sidebar-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
+}
+/* Hover effect for sidebar toggle button */
+.sidebar-toggle:hover, .font-sidebar-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
+  background-color: #6b403f; /* Darker romantic touch */
+}
+/* Font-Sample in Sidebar */
+.sidebar .font-sample {
+  padding: 10px;
+  font-size: 1.2rem;
+  color: #d8bfa7; /* Soft golden beige */
+  background-color: #3d2a2a; /* Dark romantic brown */
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6); /* Romantic glow */
+}
+
+/* Hover effect for font-sample */
+.sidebar .font-sample:hover {
+  background-color: #ff6f69; /* Romantic red with soft golden hints */
+  color: #fff;
+  transform: scale(1.05);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3); /* Soft glowing effect */
+}
+
+/* Font Section */
+.font-sample {
+  padding: 10px;
+  font-size: 1.2rem;
+  color: #5e4a3d;
+  background-color: #f2e0c6;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.font-sample:hover {
+  background-color: #e4c2a1;
+  color: #fff;
+  transform: scale(1.05);
+}
+/* Font Style Controls */
+.font-style-controls {
+  background: rgba(255, 248, 230, 0.95); /* Light cream for romantic tone */
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+/* Font Color Picker and Font Size */
+#fontColorPicker {
+  background: #f1e3b8; /* Warm color */
+  border-radius: 8px;
+  border: none;
+  width: 30px;
+  height: 30px;
+}
+
+#fontSizeSelect {
+  background: #3b2b2b; /* Subtle dark base */
+  color: #e4c2a1; /* Elegant light gold */
+  border-radius: 8px;
+  border: 1px solid #56311d;
+  padding: 8px;
+  margin-top: 6px;
+}
+
+/* Buttons */
+button {
+  background: linear-gradient(to bottom, #674631, #442f20);
+  color: #fef7e9;
+  font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+  padding: 10px 14px;
+  border: none;
+  border-radius: 0.6em;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 0.25em 0.6em rgba(0,0,0,0.2);
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+button:hover {
+  background: #5d3922; /* Deep, warm romantic color */
+  transform: scale(1.05);
+  box-shadow: 0 0.25em 1em rgba(0, 0, 0, 0.3);
+}
+/* Paper Section */
+.paper-thumbnails img {
+  width: 80px;
+  height: 120px;
+  margin: 8px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.paper-thumbnails img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Inputs */
+input[type="text"], input[type="textarea"], select {
+  background: #2e2b2b;
+  color: #f4e2c1;
+  border: 1px solid #56311d;
+  border-radius: 0.5em;
+  padding: 0.8em;
+  width: 100%;
+  font-size: 1rem;
+  font-family: 'Special Elite', cursive;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+input:focus, select:focus {
+  background: #3a2a23;
+  border-color: #a87a4a;
+}
+
+/* Candle */
+/* Candle (large, stays behind UI) */
+.giant-candle {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 160px;    /* Larger candle */
+  height: 320px;
+  background: #7e5a3c;
+  border-radius: 40px;
+  box-shadow:
+    0 0 20px rgba(0, 0, 0, 0.6),
+    inset 0 0 30px rgba(255, 240, 200, 0.2);
+  animation: flicker 1s infinite ease-in-out;
+  z-index: 0; /* Stay behind container content */
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+/* Candle Glow (background-only, soft lighting) */
+.candle-glow {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 280px; /* Wide glow spread */
+  height: 280px;
+  background: radial-gradient(circle, #fff8d0 10%, #ffb300 40%, transparent 80%);
+  border-radius: 50%;
+  animation: flicker 1.2s infinite ease-in-out;
+  box-shadow:
+    0 0 60px 10px #ffcc33,
+    0 0 120px 30px #ff9900,
+    0 0 160px 50px #ff6600;
+  opacity: 0.3; /* soft background effect */
+  z-index: -1; /* Stay behind everything */
+  pointer-events: none;
+}
+/* Animations */
+@keyframes flicker {
+  0%, 100% { opacity: 1; transform: scale(1) translateY(0); }
+  50% { opacity: 0.6; transform: scale(1.1) translateY(-5px); }
+}
+@keyframes typingEffect {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%; /* Full width to allow the entire title to appear */
+  }
+}
+@keyframes flameGlow {
+  0%, 100% {
+    text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000;
+  }
+  50% {
+    text-shadow: 0 0 5px #ff7300, 0 0 10px #ff7300, 0 0 20px #ff7300, 0 0 30px #ff7300;
+  }
+}
+
+/* Font Sample Hover */
+.sidebar .font-sample, .sidebar .font-sample:hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.sidebar .font-sample:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+}
+/* Keep header responsive */
+header, .top-bar, .logo {
+  max-width: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  text-align: center;
+}
+
+/* Optional: Logo responsive */
+.logo img {
+  max-width: 90%;
+  height: auto;
+}
+
+/* ========== MEDIA QUERIES ========== */
+@media (max-width: 1024px) {
+  .container {
+    max-width: 95vw;
+  }
+  .giant-candle {
+  width: 120px;
+  height: 240px;
+}
+.candle-glow {
+  width: 200px;
+  height: 200px;
+}
+
+}
+
+
+@media (max-width: 768px) {
+  .site-title {
+    font-size: clamp(1.2rem, 8vw, 2rem);
+    letter-spacing: 1px; /* Adjust letter spacing */
+    text-align: center;
+  }
+  .sidebar, .font-sidebar {
+    width: 90vw;
+    padding: 10px;
+    max-height: 60vh;
+  }
+  .container {
+    padding: 10px;
+    height: auto;
+  }
+  .unsent-logo {
+    height: 40px;
+    margin-right: 8px;
+  }
+  button {
+    font-size: 0.9rem;
+    padding: 8px 12px;
+  }
+  .giant-candle {
+  width: 90px;
+  height: 180px;
+}
+.candle-glow {
+  width: 160px;
+  height: 160px;
+}
+
+}
+
+@media (max-width: 420px) {
+  .site-title {
+    font-size: clamp(1rem, 10vw, 1.5rem); 
+     /* Further reduce font size for even smaller screens */
+     letter-spacing: 0.5px;
+  }
+  .giant-candle {
+  width: 70px;
+  height: 140px;
+}
+.candle-glow {
+  width: 120px;
+  height: 120px;
+}
+
+}
+@media (max-width: 320px) {
+  .site-title {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+  .giant-candle {
+  width: 60px;
+  height: 120px;
+}
+.candle-glow {
+  width: 100px;
+  height: 100px;
+}
+
+}
+
+.site-title-wrapper {
+  overflow: hidden;
+  flex-grow: 1;
+  min-width: 0;
+  display: flex;
+}
+  </style>
+</head>
+<script>
+  function toggleUnifiedSidebar() {
+    const sidebar = document.getElementById('unifiedSidebar');
+    sidebar.style.display = sidebar.style.display === 'block' ? 'none' : 'block';
+  }
+
+  function showTab(tabId) {
+    const tabs = document.querySelectorAll('.sidebar-tab');
+    tabs.forEach(tab => tab.style.display = 'none');
+    document.getElementById(tabId).style.display = 'block';
+  }
+</script>
+<body>
+  <header class="unsent-header">
+  <div class="logo-area">
+    <img src="../assets/textures/logo.png" class="unsent-logo" />
+    <div class="site-title-wrapper">
+    <span class="site-title">Unsent-Letters</span>
+    </div>
+  </div>
+  <div class="sidebar-toggle" onclick="toggleUnifiedSidebar()">☰</div>
+</header>
+  <!-- Glow + Candle -->
+  <div class="candle-glow"></div>
+  <div class="giant-candle">
+    <div class="flame"></div>
+    <div class="wick"></div>
+    <div class="stick"></div>
+  </div>
+ <!-- 🌟 Unified Sidebar Toggle Button -->
+
+<!-- 🌟 Unified Sidebar -->
+<div id="unifiedSidebar" class="sidebar">
+  <!-- Profile Avatar -->
+<a href="/profile" id="topProfileLink">
+ <img id="userAvatarDisplay" 
+     src="{{ url_for('serve_avatar', filename=(data.avatar if data.avatar else 'default_avatar.png')) }}" 
+     alt="Profile Avatar" 
+     style="width: 48px; height: 48px; border-radius: 50%; box-shadow: 0 0 8px rgba(0,0,0,0.4); cursor: pointer;">
+
+</a>
+
+  <!-- Font Section -->
+  <h3 style="margin-top: 20px;">✒️ Choose Font</h3>
+  <div class="font-sample" data-font="Special Elite" style="font-family: 'Special Elite';">Typewriter</div>
+  <div class="font-sample" data-font="Dancing Script" style="font-family: 'Dancing Script';">Dancing Script</div>
+  <div class="font-sample" data-font="Great Vibes" style="font-family: 'Great Vibes';">Great Vibes</div>
+  <div class="font-sample" data-font="IM Fell English SC" style="font-family: 'IM Fell English SC';">Gothic</div>
+  <div class="font-sample" data-font="Libre Baskerville" style="font-family: 'Libre Baskerville';">Baskerville</div>
+  <div class="font-sample" data-font="VT323" style="font-family: 'VT323';">VT323</div>
+  <div class="font-sample" data-font="Courier Prime" style="font-family: 'Courier Prime';">Courier</div>
+  <div class="font-sample" data-font="Cedarville Cursive" style="font-family: 'Cedarville Cursive';">Cedarville</div>
+  <div class="font-sample" data-font="Alex Brush" style="font-family: 'Alex Brush';">Alex Brush</div>
+  <div class="font-sample" data-font="Cinzel Decorative" style="font-family: 'Cinzel Decorative';">Cinzel</div>
+<div class="font-sample" data-font="Cormorant Garamond" style="font-family: 'Cormorant Garamond';">Cormorant</div>
+<div class="font-sample" data-font="UnifrakturCook" style="font-family: 'UnifrakturCook';">Unifraktur</div>
+<div class="font-sample" data-font="Parisienne" style="font-family: 'Parisienne';">Parisienne</div>
+<div class="font-sample" data-font="Allura" style="font-family: 'Allura';">Allura</div>
+<div class="font-sample" data-font="Tangerine" style="font-family: 'Tangerine';">Tangerine</div>
+<div class="font-sample" data-font="Petit Formal Script" style="font-family: 'Petit Formal Script';">Petit Formal</div>
+<div class="font-sample" data-font="La Belle Aurore" style="font-family: 'La Belle Aurore';">Belle Aurore</div>
+<div class="font-sample" data-font="Calligraffitti" style="font-family: 'Calligraffitti';">Calligraffitti</div>
+<div class="font-sample" data-font="Herr Von Muellerhoff" style="font-family: 'Herr Von Muellerhoff';">Muellerhoff</div>
+<div class="font-sample" data-font="Meddon" style="font-family: 'Meddon';">Meddon</div>
+<div class="font-sample" data-font="Homemade Apple" style="font-family: 'Homemade Apple';">Homemade Apple</div>
+<div class="font-sample" data-font="Just Me Again Down Here" style="font-family: 'Just Me Again Down Here';">Just Me Again</div>
+<div class="font-sample" data-font="Nanum Pen Script" style="font-family: 'Nanum Pen Script';">Nanum Pen</div>
+<div class="font-sample" data-font="Patrick Hand" style="font-family: 'Patrick Hand';">Patrick Hand</div>
+<div class="font-sample" data-font="Caveat" style="font-family: 'Caveat';">Caveat</div>
+<div class="font-sample" data-font="Shadows Into Light" style="font-family: 'Shadows Into Light';">Shadows</div>
+<div class="font-sample" data-font="Playball" style="font-family: 'Playball';">Playball</div>
+<div class="font-sample" data-font="Arizonia" style="font-family: 'Arizonia';">Arizonia</div>
+<div class="font-sample" data-font="Sail" style="font-family: 'Sail';">Sail</div>
+<div class="font-sample" data-font="Rouge Script" style="font-family: 'Rouge Script';">Rouge Script</div>
+<div class="font-sample" data-font="Pacifico" style="font-family: 'Pacifico';">Pacifico</div>
+<div class="font-sample" data-font="Lobster" style="font-family: 'Lobster';">Lobster</div>
+<div class="font-sample" data-font="Sacramento" style="font-family: 'Sacramento';">Sacramento</div>
+<div class="font-sample" data-font="Cutive Mono" style="font-family: 'Cutive Mono';">Cutive Mono</div>
+<div class="font-sample" data-font="IBM Plex Mono" style="font-family: 'IBM Plex Mono';">IBM Plex Mono</div>
+<div class="font-sample" data-font="Just Another Hand" style="font-family:  'Just Another Hand';">Just Another Hand</div>
+<div class="font-sample" data-font="Satisfy" style="font-family: 'Satisfy';">Satisfy</div>
+<div class="font-sample" data-font="Cookie" style="font-family: 'Cookie';">Cookie</div>
+<div class="font-sample" data-font="Quicksand" style="font-family: 'Quicksand';">Quicksand</div>
+<div class="font-sample" data-font="Cinzel" style="font-family: 'Cinzel';">Cinzel</div>
+<div class="font-sample" data-font="Berkshire Swash" style="font-family: 'Berkshire Swash';">Berkshire Swash</div>
+<div class="font-sample" data-font="Zilla Slab" style="font-family: 'Zilla Slab';">Zilla Slab</div>
+<div class="font-sample" data-font="Allura" style="font-family: 'Allura';">Allura</div>
+<div class="font-sample" data-font="Playfair Display" style="font-family: 'Playfair Display';">Playfair Display</div>
+<div class="font-sample" data-font="Cedarville Cursive" style="font-family: 'Cedarville Cursive';">Cedarville Cursive</div>
+<div class="font-sample" data-font="Abril Fatface" style="font-family: 'Abril Fatface';">Abril Fatface</div>
+<div class="font-sample" data-font="Merriweather" style="font-family: 'Merriweather';">Merriweather</div>
+<div class="font-sample" data-font="Roboto Slab" style="font-family: 'Roboto Slab';">Roboto Slab</div>
+<div class="font-sample" data-font="Lora" style="font-family: 'Lora';">Lora</div>
+<div class="font-sample" data-font="Cormorant Unicase" style="font-family: 'Cormorant Unicase';">Cormorant Unicase</div>
+<div class="font-sample" data-font="Sacramento" style="font-family: 'Sacramento';">Sacramento</div>
+<div class="font-sample" data-font="Sirin Stencil" style="font-family: 'Sirin Stencil';">Sirin Stencil</div>
+<div class="font-sample" data-font="Arvo" style="font-family: 'Arvo';">Arvo</div>
+<div class="font-sample" data-font="Lobster Two" style="font-family: 'Lobster Two';">Lobster Two</div>
+<div class="font-sample" data-font="Courgette" style="font-family: 'Courgette';">Courgette</div>
+<div class="font-sample" data-font="Della Respira" style="font-family: 'Della Respira';">Della Respira</div>
+<div class="font-sample" data-font="Montez" style="font-family: 'Montez';">Montez</div>
+<div class="font-sample" data-font="Allura" style="font-family: 'Allura';">Allura</div>
+<div class="font-sample" data-font="Tisa" style="font-family: 'Tisa';">Tisa</div>
+<div class="font-sample" data-font="Rouge Script" style="font-family: 'Rouge Script';">Rouge Script</div>
+ 
+  <button id="applyFontBtn">Apply Font</button>
+<hr style="margin: 10px 0; border-color: #c2b59b;">
+
+  <h3>🎨 Font Style</h3>
+  <div class="font-style-controls">
+    <label style="display:block; margin-bottom: 6px;">
+      Color: <input type="color" id="fontColorPicker" value="#2a1f1c" />
+    </label>
+    <label style="display:block; margin-bottom: 8px;">
+      Size:
+      <select id="fontSizeSelect">
+        <option value="16px">Small</option>
+        <option value="20px" selected>Medium</option>
+        <option value="24px">Large</option>
+        <option value="28px">X-Large</option>
+      </select>
+    </label>
+    <div class="style-buttons" style="display:flex; gap:6px; margin-top: 10px;">
+      <button id="boldToggle" title="Bold" style="font-weight:bold;">B</button>
+      <button id="italicToggle" title="Italic" style="font-style:italic;">I</button>
+      <button id="underlineToggle" title="Underline" style="text-decoration:underline;">U</button>
+    </div>
+  </div>
+
+  <!-- Paper Section -->
+  <h3 style="margin-top: 20px;">📜 Choose Paper</h3>
+  <div class="paper-thumbnails">
+    <img src="../assets/textures/aes.png" data-bg="aes.png" alt="Paper 1" />
+    <img src="../assets/textures/anger.png" data-bg="anger.png" alt="Paper 2" />
+    <img src="../assets/textures/butterfly.png" data-bg="butterfly.png" alt="Paper 3" />
+    <img src="../assets/textures/clip.png" data-bg="clip.png" alt="Paper 4" />
+    <img src="../assets/textures/closure.png" data-bg="closure.png" alt="Paper 5" />
+    <img src="../assets/textures/closure1.png" data-bg="closure1.png" alt="Paper 6" />
+    <img src="../assets/textures/crimple.png" data-bg="crimple.png" alt="Paper 7" />
+    <img src="../assets/textures/doc.png" data-bg="doc.png" alt="Paper 8" />
+    <img src="../assets/textures/firstshuffle.png" data-bg="firstshuffle.png" alt="Paper 9" />
+    <img src="../assets/textures/goodbye2.png" data-bg="goodbye2.png" alt="Paper 10" />
+    <img src="../assets/textures/goodbye.png" data-bg="goodbye.png" alt="Paper 11" />
+    <img src="../assets/textures/leaves.png" data-bg="leaves.png" alt="Paper 12" />
+    <img src="../assets/textures/lines.png" data-bg="lines.png" alt="Paper 13" />
+    <img src="../assets/textures/lip.png" data-bg="lip.png" alt="Paper 14" />
+    <img src="../assets/textures/lost-love.png" data-bg="lost-love.png" alt="Paper 15" />
+    <img src="../assets/textures/lost-love2.png" data-bg="lost-love2.png" alt="Paper 16" />
+    <img src="../assets/textures/mail.png" data-bg="mail.jpg" alt="Paper 17" />
+    <img src="../assets/textures/plain.png" data-bg="plain.png" alt="Paper 18" />
+    <img src="../assets/textures/planets.png" data-bg="planets.png" alt="Paper 19" />
+    <img src="../assets/textures/rose.png" data-bg="rose.png" alt="Paper 20" />
+    <img src="../assets/textures/sea.png" data-bg="sea.png" alt="Paper 21" />
+    <img src="../assets/textures/simple.png" data-bg="simple.png" alt="Paper 22" />
+    <img src="../assets/textures/stamp.png" data-bg="stamp.png" alt ="Paper 23" />
+    <img src="../assets/textures/vintage_paper.png" data-bg="vintage_paper.png" alt="Paper 24" /> 
+
+  </div>
+</div>
+
+
+  <!-- Main container with letter writing area -->
+  <div class="container flicker-shadow">
+    <div class="mood-toggle">
+      <label>Choose a mood:</label>
+      <select id="mood">
+        <option value="lost-love">💔 Lost Love</option>
+        <option value="closure">🌫️ Closure</option>
+        <option value="anger">🔥 Anger</option>
+        <option value="goodbye">🌙 Goodbye</option>
+      </select>
+    </div>
+    <label style="cursor:pointer;">
+      <input type="checkbox" id="voiceToggle" checked />
+      🔈 Voice On/Off
+    </label>
+    <button id="micBtn">🎙️ Dictate Letter</button>
+    <div style="margin-bottom: 12px;">
+  <label for="letterTitle">📝 Title:</label>
+  <input type="text" id="letterTitle" placeholder="e.g., The Final Goodbye" style="padding:6px; width: 100%; border-radius: 6px; font-family: 'Special Elite', cursive;" />
+</div>
+
+    <div class="letter-box">
+      <textarea id="letter" placeholder="Write the letter you'll never send..."></textarea>
+      <button onclick="saveLetter()">💾 Save Letter</button>
+      <p id="save-status" style="color: green;"></p>
+    </div>
+
+    <!-- Signature Input -->
+    <div class="signature-input">
+      <label for="signatureInput">✍️ Your Signature:</label>
+      <input type="text" id="signatureInput" placeholder="Lost in Silence" style="padding:6px; border-radius:6px; font-family:'Caveat', cursive;" />
+    </div>
+
+     <button id="sendBtn">Send</button>
+    <button id="downloadLatestBtn" style="display: none;">Download Latest Letter</button>
+    <div id="response" class="fade-in"></div>
+    <div id="archive-list" class="archive-container"></div>
+     <div class="postmark">Sent: Somewhere Between Realms</div>
+
+  <audio id="bg-music" autoplay loop>
+    <source src="../assets/sounds/one_love_piano.mp3" type="audio/mp3" />
+  </audio>
+
+  <!-- Hidden input for storing selected avatar -->
+  <input type="hidden" name="avatar" id="selectedAvatar">
+
+  <script>
+    // Toggle Font Sidebar
+function toggleFontSidebar() {
+  const fontSidebar = document.querySelector('.font-sidebar');
+  fontSidebar.classList.toggle('visible'); // Show/Hide
+}
+
+// Toggle Paper Sidebar
+function toggleSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  sidebar.classList.toggle('visible'); // Show/Hide
+}
+</script>
+  <script>
+  function saveLetter() {
+      const title = document.getElementById('letterTitle')?.value || '';
+  const letter = document.getElementById('letter').value;
+  const reply = document.getElementById('response')?.innerText || '';  // ✅ Capture AI reply
+  const mood = document.getElementById('mood')?.value || '';
+  const avatar = document.getElementById('selectedAvatar').value;
+  if (!letter.trim()) {
+    alert("Write something before saving!");
+    return;
+  }
+  
+    // Handle Time Capsule
+    let openDate = '';
+    let isTimeCapsule = 0;
+    if (mood === "Time Capsule") {
+      openDate = document.getElementById('openDate')?.value;
+      if (!openDate) {
+        alert("Please select a future date for your Time Capsule.");
+        return;
+      }
+      isTimeCapsule = 1;
+    }
+    
+    // Prepare POST body
+    const body = `letter=${encodeURIComponent(letter)}&reply=${encodeURIComponent(reply)}&title=${encodeURIComponent(title)}&mood=${encodeURIComponent(mood)}&avatar=${encodeURIComponent(avatar)}&openDate=${encodeURIComponent(openDate)}&isTimeCapsule=${isTimeCapsule}`;
+
+  fetch('/create-letter', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded'
+  },
+  body: body  // ✅ use the pre-built body string with openDate + isTimeCapsule
+})
+  .then(response => {
+    if (response.status === 204) {
+      document.getElementById('save-status').textContent = "✅ Letter saved successfully!";
+      document.getElementById('letter').value = "";
+      document.getElementById('letterTitle').value = "";
+        document.getElementById('openDate')?.value = "";
+    } else {
+      document.getElementById('save-status').textContent = "❌ Failed to save letter.";
+    }
+  })
+  .catch(() => {
+    document.getElementById('save-status').textContent = "❌ Server error.";
+  });
+}
+</script>
+<script>
+let selectedAvatar = "";
+document.querySelectorAll('.avatar-option').forEach(img => {
+  img.addEventListener('click', () => {
+    document.querySelectorAll('.avatar-option').forEach(i => i.classList.remove('selected'));
+    img.classList.add('selected');
+    selectedAvatar = img.dataset.avatar;
+    document.getElementById('selectedAvatar').value = selectedAvatar; // Store for form
+  });
+});
+</script>
+<script>
+  fetch('/get-user')
+    .then(res => res.json())
+    .then(data => {
+      const avatarPath = data.avatar ? `/assets/avatars/${data.avatar}` : '/assets/avatars/avatar1.jpg';
+
+      document.getElementById('userAvatarDisplay').src = avatarPath;
+    })
+    .catch(() => {
+      console.log('⚠ Failed to load user avatar');
+    });
+    document.querySelectorAll('.font-sample').forEach(sample => {
+  sample.addEventListener('click', () => {
+    const font = sample.dataset.font;
+    document.body.style.fontFamily = font; // Update body font-family
+  });
+});
+
+</script>
+
+
+  <script src="script.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Forgot Your Password?</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Playball&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Special Elite', cursive;
+      background: linear-gradient(to bottom right, #1f3c3c, #2d5454);
+      color: #fdf6e3;
+      display: flex;
+      flex-direction: column; /* Ensures proper stacking of content */
+      align-items: center;
+      justify-content: flex-start; /* Make sure content starts from top */
+      padding: 1rem;
+      position: relative;
+      overflow-y: auto; /* Allow vertical scrolling */
+      min-height: 100vh;
+    }
+
+    h2 {
+      font-family: 'Playball', cursive;
+      font-size: 28px;
+      text-align: center;
+      margin-bottom: 15px;
+      color: #ffe39f;
+      text-shadow: 0 0 8px rgba(255, 210, 120, 0.6);
+    }
+
+    .form-box {
+  background: rgba(255, 255, 240, 0.06);
+  border: 1px solid rgba(255, 245, 200, 0.2);
+  padding: 25px 30px;
+  border-radius: 16px;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 20px rgba(255, 230, 180, 0.1);
+  position: relative;
+  z-index: 2;
+  width: 90%;
+  max-width:  380px; /* Slightly increase width for larger devices */
+  height: auto;
+  min-height: 300px; /* Ensure the box has a minimum height */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+   margin-top: 240px;
+}
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 15px;
+      color: #fbe8b2;
+    }
+
+    input[type="email"] {
+      width: 90%; 
+      padding: 10px 14px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-family: inherit;
+      background: #3a5959;
+      color: #ffecc2;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    input[type="email"]:focus {
+      background: #4c6d6d;
+      box-shadow: 0 0 8px rgba(255, 230, 170, 0.3);
+    }
+
+    button {
+      margin-top: 22px;
+      width: 100%;
+      background: linear-gradient(to right, #c2945f, #dfb374);
+      color: #1f140a;
+      padding: 12px 22px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-family: 'Special Elite', cursive;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #b68d5d;
+    }
+
+    /* Floating soft gold specks */
+    .speck {
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background: rgba(255, 215, 140, 0.3);
+      border-radius: 50%;
+      animation: floatSpeck 16s linear infinite;
+    }
+
+    @keyframes floatSpeck {
+      0% {
+        transform: translateY(100vh) scale(0.5);
+        opacity: 0;
+      }
+      40% { opacity: 1; }
+      100% {
+        transform: translateY(-100vh) scale(1.3);
+        opacity: 0;
+      }
+    }
+
+    .speck:nth-child(1) { left: 12%; animation-delay: 1s; }
+    .speck:nth-child(2) { left: 28%; animation-delay: 3s; }
+    .speck:nth-child(3) { left: 45%; animation-delay: 2s; }
+    .speck:nth-child(4) { left: 65%; animation-delay: 4s; }
+    .speck:nth-child(5) { left: 78%; animation-delay: 5s; }
+    .speck:nth-child(6) { left: 90%; animation-delay: 6s; }
+    /* Media Query for Mobile Devices */
+    @media (max-width: 768px) {
+      .form-box {
+        padding: 8vw 6vw;
+        max-height: 90vh;
+        overflow-y: auto;
+      }
+      h2 {
+        font-size: 2rem;
+      }
+      input, button {
+        font-size: 0.95rem;
+      }
+      p, a {
+        font-size: 0.85rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Floating candle-gold specks -->
+  <div class="speck"></div>
+  <div class="speck"></div>
+  <div class="speck"></div>
+  <div class="speck"></div>
+  <div class="speck"></div>
+  <div class="speck"></div>
+
+  <div class="form-box">
+    <h2>Forgot Your Password?</h2>
+    <form method="POST">
+      <label for="email">Enter your registered email:</label>
+      <input type="email" name="email" required>
+      <button type="submit">✨ Send OTP</button>
+    </form>
+  </div>
+</body>
+</html>

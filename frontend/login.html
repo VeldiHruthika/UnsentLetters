@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Playball&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Playfair Display', serif;
+      color: #fbe9d0;
+      height: 100vh;
+      background: radial-gradient(ellipse at center, #2c1e1c 0%, #0d0605 100%);
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+      position: relative; 
+    }
+
+    .candle-background {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at center 40%, #3d2c29 0%, #0d0605 90%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .flicker-overlay {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle, rgba(255, 214, 165, 0.1) 0%, transparent 60%);
+      animation: flicker 3s infinite alternate ease-in-out;
+      z-index: 0;
+    }
+
+    @keyframes flicker {
+      0%, 100% { opacity: 0.1; }
+      50% { opacity: 0.25; }
+    }
+
+    .vintage-card {
+      position: relative;
+      background: rgba(255, 243, 220, 0.06);
+      border: 1px solid rgba(255, 204, 170, 0.1);
+      padding: 3rem 2.5rem;
+      border-radius: 18px;
+      box-shadow: 0 0 40px rgba(255, 180, 150, 0.1);
+      backdrop-filter: blur(8px);
+      z-index: 2;
+      text-align: center;
+      width: 100%;
+      max-width: 450px;
+    }
+
+    .vintage-card h2 {
+      font-family: 'Playball', cursive;
+      font-size: 2.5rem;
+      color: #ffd6bb;
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      font-size: 1rem;
+      display: block;
+      text-align: left;
+      margin-bottom: 0.3rem;
+    }
+
+    input[type="email"], input[type="password"] {
+      width: 100%;
+      padding: 1rem;
+      border: none;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff0e6;
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+      font-family: 'Playfair Display', serif;
+    }
+
+    input:focus {
+      outline: 2px solid #ffb88c;
+    }
+
+    button {
+      background: #ff915e;
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 10px;
+      font-family: 'Cinzel', cursive;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin-top: 0.5rem;
+    }
+
+    button:hover {
+      background: #ff7742;
+    }
+
+    a {
+      color: #ffe6cc;
+      text-decoration: none;
+      font-style: italic;
+      font-size: 1rem;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    p {
+      margin-top: 1.2rem;
+      font-size: 0.9rem;
+    }
+
+    /* Royal Pop-up Styles */
+    .royal-popup {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(255, 243, 220, 0.9);
+      padding: 30px 40px;
+      border-radius: 20px;
+      width: 70%;
+      max-width: 500px;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(255, 180, 150, 0.6);
+      display: none;
+      z-index: 10;
+      font-family: 'Playball', cursive;
+      color: #3d2c29;
+      opacity: 0;
+      animation: fadeIn 1s ease-in-out forwards;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(-50px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .royal-popup h3 {
+      font-size: 2rem;
+      color: #ff6f56;
+      margin-bottom: 20px;
+    }
+
+    .royal-popup p {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
+
+    .royal-popup button {
+      background: #ff915e;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .royal-popup button:hover {
+      background: #ff7742;
+    }
+
+    /* Media Query for Mobile Devices */
+    @media (max-width: 768px) {
+      .vintage-card {
+        padding: 8vw 6vw;
+        max-height: 90vh;
+        overflow-y: auto;
+      }
+      .candle-background {
+        max-height: 100vh;
+        overflow: hidden;
+      }
+      .vintage-card h2 {
+        font-size: 2rem;
+      }
+      input, button {
+        font-size: 0.95rem;
+      }
+      p, a {
+        font-size: 0.85rem;
+      }
+    }
+  </style>
+
+  <script>
+  window.onload = function() {
+  const loginError = "{{ error }}";
+  if (loginError) {
+    showError(loginError);
+  }
+};
+
+// Function to show error message on invalid login
+function showError(errorMessage) {
+  const errorElement = document.getElementById('login-error');
+  errorElement.textContent = errorMessage;
+  errorElement.style.display = 'block';
+}
+
+// Function to handle the login form submit
+function handleLogin(event) {
+  event.preventDefault();  // Prevent default form submission
+
+  // You can add AJAX login validation here if necessary, for now, we assume success
+  const isSuccess = true; // Simulate a successful login (you can replace this with actual validation)
+
+  if (isSuccess) {
+    // Show the popup after login
+    showPopup();
+  } else {
+    // Show error if login fails
+    showError("Invalid login credentials");
+  }
+}
+
+// Function to show the success popup on valid login
+function showPopup() {
+  const popup = document.getElementById('royal-popup');
+  popup.style.display = 'block';
+  
+  // Set a timeout to redirect after 3 seconds
+  setTimeout(function() {
+    window.location.href = '/frontend/index.html'; // Change this to the destination URL
+  }, 3000); // 3 seconds delay
+}
+
+</script>
+
+</head>
+<body>
+  <div class="candle-background">
+    <div class="flicker-overlay"></div>
+
+    <div class="vintage-card">
+      <h2>🕯 Login to Your Soulbox</h2>
+      <form method="POST">
+        <label>Email:</label><br>
+        <input type="email" name="email" placeholder="Enter email" value="{{ email }}" required><br><br>
+
+        <label>Password:</label><br>
+        <input type="password" name="password" required><br><br>
+        {% if error %}
+          <p style="color: red; font-weight: bold;">{{ error }}</p>
+        {% endif %}
+
+        <button type="submit">Login</button>
+      </form>
+      <p><a href="/forgot">Forgot Password?</a></p>
+      <p>Don't have an account? <a href="/register">Register</a></p>
+    </div>
+  </div>
+
+  <!-- Royal Pop-up -->
+  <div class="royal-popup" id="royal-popup" style="display:none;">
+    <h3>💌 Diving into the world of Unsent Letters...</h3>
+    <p>We are opening the gates to a world of untold stories, waiting to be written. Please hold on, while we take you there.</p>
+    <button onclick="window.location.href='/frontend/index.html'">Go to Letters</button>
+  </div>
+</body>
+</html>

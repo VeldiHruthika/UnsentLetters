@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Verify OTP</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Playball&display=swap" rel="stylesheet">
+  <style>
+  body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom right, #2e0c3b, #1a0823); /* Dark romantic gradient */
+      font-family: 'Special Elite', cursive;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #d1a1a6; /* Soft light color for text */
+      overflow: hidden;
+      position: relative;
+    }
+
+    .container {
+      background: rgba(0, 0, 0, 0.7); /* Darker background with transparency */
+      border-radius: 15px;
+      padding: 20px 25px; 
+      box-shadow: 0 0 25px rgba(204, 102, 102, 0.6);
+      width: 90%;
+      max-width: 300px; /* Reduced max-width */
+      backdrop-filter: blur(6px);
+      z-index: 1;
+    }
+
+    h1 {
+      text-align: center;
+      font-family: 'Playball', cursive;
+      font-size: 22px; /* Slightly smaller */
+      margin-bottom: 12px;
+      color: #f8b8b8; /* Soft romantic color */
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 12px;
+      color: #f8b8b8;
+    }
+
+    input[type="text"] {
+      width: 95%;
+      padding: 10px 14px;
+      border: none;
+      border-radius: 8px;
+      background: #3e2a47; /* Dark background for input */
+      font-size: 13px; /* Smaller font size */
+      margin-bottom: 15px;
+      font-family: inherit;
+      color: #fefefe;
+    }
+
+    input[type="text"]:focus {
+      outline: none;
+      background: #4a334b;
+      box-shadow: 0 0 8px rgba(255, 182, 189, 0.4); /* Soft glowing effect */
+    }
+
+    button {
+      width: 100%;
+      background: linear-gradient(135deg, #f25c7b, #d34a63); /* Romantic gradient */
+      color: white;
+      padding: 10px;
+      font-size: 14px;  /* Slightly smaller font size */
+      border: none;
+      border-radius: 10px;
+      font-family: 'Special Elite', cursive;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(255, 0, 0, 0.3);
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #f72f4f;
+    }
+
+    #error-message {
+      text-align: center;
+      color: crimson;
+      margin-top:  10px;  /* Reduced margin */
+      font-size: 12px;
+    }
+
+    /* Subtle sparkles in the background */
+    .spark {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: #f8b8b8;
+      border-radius: 50%;
+      opacity: 0.5;
+      animation: floatDust 12s linear infinite;
+    }
+
+    @keyframes floatDust {
+      0% {
+        transform: translateY(100vh) scale(0.5);
+        opacity: 0;
+      }
+      50% { opacity: 1; }
+      100% {
+        transform: translateY(-100vh) scale(1);
+        opacity: 0;
+      }
+    }
+
+    .spark:nth-child(1) { left: 15%; animation-delay: 2s; }
+    .spark:nth-child(2) { left: 35%; animation-delay: 4s; }
+    .spark:nth-child(3) { left: 55%; animation-delay: 1s; }
+    .spark:nth-child(4) { left: 75%; animation-delay: 3s; }
+    .spark:nth-child(5) { left: 85%; animation-delay: 5s; }
+  </style>
+</head>
+
+<body>
+  <!-- Background sparkles -->
+  <div class="spark"></div>
+  <div class="spark"></div>
+  <div class="spark"></div>
+  <div class="spark"></div>
+  <div class="spark"></div>
+
+
+  <div class="container">
+    <h1>🔐 Verify OTP</h1>
+    <form method="POST" id="otp-form">
+      <label for="otp">Enter the code sent to your email:</label>
+      <input type="text" id="otp" name="otp" placeholder="e.g. 1234" required>
+      <button type="submit">Verify</button>
+    </form>
+    <p id="error-message" style="display: none;">Invalid OTP. Please try again!</p>
+  </div>
+
+  <script>
+    // Optional JS error trigger (if backend adds param)
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("error")) {
+      document.getElementById("error-message").style.display = "block";
+    }
+  </script>
+</body>
+</html>

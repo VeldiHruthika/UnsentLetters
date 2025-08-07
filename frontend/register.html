@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Begin Your Story</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      height: 100vh;
+      background: radial-gradient(ellipse at bottom, #090b1f 0%, #01010a 100%);
+      font-family: 'Dancing Script', cursive;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      padding: 1rem;
+      position: relative;
+    }
+
+    .starry-sky::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: radial-gradient(white 1px, transparent 1px);
+      background-size: 3px 3px;
+      opacity: 0.05;
+      z-index: 0;
+      animation: twinkle 10s linear infinite;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.05; }
+      50% { opacity: 0.1; }
+    }
+
+    .floating-letters span {
+      position: absolute;
+      top: -50px;
+      font-size: 22px;
+      opacity: 0.15;
+      pointer-events: none;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.2;
+      }
+      100% {
+        transform: translateY(110vh) translateX(30px) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .floating-letters {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .register-box {
+      position: relative;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 204, 170, 0.1);
+  padding: 3rem 2.5rem;
+  border-radius: 18px;
+  backdrop-filter: blur(15px);
+  box-shadow: 0 0 20px rgba(255, 203, 255, 0.25);
+  width: 100%; /* Adjust width to fit the screen well */
+  max-width: 450px; /* Max width for larger screens */
+  text-align: center;
+  z-index: 2;
+  text-align: center;
+  /*transition: 0.3s ease;
+  max-height: 450px; /* Adjusted max height */
+ /* overflow-y: auto; /* Enable vertical scrolling if content exceeds max height */
+ /* box-sizing: border-box;
+  margin: 0 auto; /* Center the box horizontally */
+}
+
+    .register-box h2 {
+      margin-bottom: 20px;
+      font-size: 2.5rem;
+      color: #ffccf2;
+      margin-bottom: 1.5rem;
+    }
+
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 1rem;
+      border: none;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      margin-bottom: 1.5rem;
+      font-size: 1rem;/* Adjusted font size for better readability */
+    }
+
+    input:focus {
+      outline: 2px solid #ffb8e1;
+    }
+
+    button {
+      background: #ff6fae;
+      border: none;
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 10px;
+      font-weight: bold;
+      font-family: inherit;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: 0.3s ease;
+      margin-top: 0.5rem;
+    }
+
+    button:hover {
+      background: #ff3e8c;
+    }
+
+    a {
+      color: #ffe6fb;
+      text-decoration: none;
+      font-style: italic;
+      font-size: 1rem;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+    @media screen and (max-width: 768px) {
+      .register-box {
+        padding: 8vw 6vw;
+        max-height: 90vh;
+        overflow-y: auto;
+      }
+
+      .register-box h2 {
+        font-size: 2rem;
+      }
+
+      input[type="email"],
+      input[type="password"] {
+        font-size: 0.95rem;
+      }
+
+      button {
+        width: 100%;
+        padding: 12px 25px;
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      .register-box {
+        width: 95%;
+        max-width: 300px;
+      }
+
+      .register-box h2 {
+        font-size: 20px;
+      }
+
+      input[type="email"],
+      input[type="password"] {
+        font-size: 14px;
+      }
+
+      button {
+        width: 100%;
+        padding: 14px 30px;
+      }
+    }
+
+    @media screen and (max-width: 320px) {
+      .register-box {
+        width: 95%;
+        max-width: 270px;
+      }
+
+      .register-box h2 {
+        font-size: 18px;
+      }
+
+      input[type="email"],
+      input[type="password"] {
+        font-size: 13px;
+      }
+
+      button {
+        width: 100%;
+        padding: 14px 30px;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="starry-sky"></div>
+
+  <div class="floating-letters">
+    <!-- Generate messy/random ✉️ -->
+    <script>
+      for (let i = 0; i < 40; i++) {
+        const span = document.createElement('span');
+        span.innerHTML = '✉';
+        span.style.left = Math.random() * 100 + 'vw';
+        span.style.animationDuration = 8 + Math.random() * 8 + 's'; // 8s to 16s
+        span.style.fontSize = 18 + Math.random() * 10 + 'px';
+        span.style.animationDelay = Math.random() * 10 + 's';
+        document.querySelector('.floating-letters').appendChild(span);
+      }
+    </script>
+  </div>
+
+  <div class="register-box">
+    <h2>📮 Create Your Account</h2>
+    <form method="POST">
+      <label>Email:</label><br>
+      <input type="email" name="email" required><br><br>
+
+      <label>Password:</label><br>
+      <input type="password" name="password" required><br><br>
+
+      <button type="submit">Register</button>
+    </form>
+    <p>Already have an account? <a href="/login">Login</a></p><!-- Message shown if already registered -->
+  </div>
+  
+</body>
+</html>

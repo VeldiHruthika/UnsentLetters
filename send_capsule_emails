@@ -1,0 +1,47 @@
+from flask import Flask
+import sqlite3
+from flask_mail import Mail, Message
+from datetime import datetime
+import os
+
+app = Flask(__name__)
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = 'hruthika.veldi123@gmail.com'
+app.config['MAIL_PASSWORD'] = 'earqnkrqrunfjapo'
+mail = Mail(app)
+
+DB_PATH = 'unsent_letters.db'
+
+def get_db():
+    return sqlite3.connect(DB_PATH)
+
+def send_capsule_notifications():
+    today = datetime.now().strftime('%Y-%m-%d')
+    conn = get_db()
+    c = conn.cursor()
+
+    c.execute('''
+        SELECT user_email, title, open_date
+        FROM letters
+        WHERE is_time_capsule = 1 AND open_date = ?
+    ''', (today,))
+    letters = c.fetchall()
+    conn.close()
+
+    with app.app_context():
+        for email, title, open_date in letters:
+            try:
+                subject = "🎉 Your Time Capsule is Now Unlocked!"
+                body = f"Hey!\n\nYour time capsule titled '{title or 'Untitled'}' is now unlocked.\nOpen it here: http://127.0.0.1:5000/saved-letters-page\n\nKeep writing ✍️"
+
+                msg = Message(subject, sender=app.config['MAIL_USERNAME'], recipients=[email])
+                msg.body = body
+                mail.send(msg)
+                print(f"✅ Email sent to {email}")
+            except Exception as e:
+                print(f"❌ Failed to send to {email}: {e}")
+
+if __name__ == "__main__":
+    send_capsule_notifications()

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Secure Your New Path</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background: linear-gradient(to bottom right, #1a1a1a, #2b2b2b);
+      color: #eee;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      overflow-x: hidden;
+      overflow-y: auto;
+      position: relative;
+    }
+
+    .container {
+      background: rgba(30, 30, 30, 0.85);
+      padding:  2rem;  /* Reduced padding */
+  border-radius: 15px;  /* Slightly smaller radius */
+  box-shadow: 0 0 20px rgba(255, 100, 100, 0.2);
+      text-align: center;
+      backdrop-filter: blur(4px);
+      width: 100%;
+      max-width: 360px;
+      z-index: 2;
+    }
+
+    h2 {
+      font-family: 'Pacifico', cursive;
+      font-size:  1.8rem;
+      color: #ffb3ab;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      font-size:0.95rem;
+      color: #ccc;
+      margin-bottom: 1.2rem;
+    }
+
+    input[type="text"] {
+      padding: 0.75rem;
+      width: 100%;
+      font-size: 1rem;
+  border-radius: 8px;
+      border: 1px solid #555;
+      background-color: #111;
+      color: #fefefe;
+      margin-bottom:1rem;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #ff7e7e;
+      box-shadow: 0 0 8px #ffb4a2;
+    }
+
+    button {
+      background: linear-gradient(135deg, #ff4e50, #ff7676);
+      border: none;
+      color: white;
+      font-size:1rem;
+      padding: 0.75rem 2rem;
+  border-radius: 8px; 
+      font-family: 'Open Sans', sans-serif;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background: #ff2e41;
+      transform: scale(1.05);
+      box-shadow: 0 0 15px #ff7676;
+    }
+
+    /* Misty bubbles */
+    .bubble {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 120, 120, 0.08);
+      animation: float 12s infinite ease-in-out;
+    }
+
+    .bubble:nth-child(1) { width: 100px; height: 100px; left: 10%; top: 85%; animation-delay: 0s; }
+    .bubble:nth-child(2) { width: 60px; height: 60px; left: 25%; top: 100%; animation-delay: 2s; }
+    .bubble:nth-child(3) { width: 120px; height: 120px; left: 45%; top: 90%; animation-delay: 3s; }
+    .bubble:nth-child(4) { width: 80px; height: 80px; left: 70%; top: 95%; animation-delay: 1.5s; }
+    .bubble:nth-child(5) { width: 50px; height: 50px; left: 85%; top: 98%; animation-delay: 4s; }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.1;
+      }
+      50% {
+        opacity: 0.2;
+      }
+      100% {
+        transform: translateY(-120vh) scale(1.2);
+        opacity: 0;
+      }
+    }
+     /* ───── Media Queries ───── */
+/* Medium laptops and desktops */
+@media (min-width: 1025px) and (max-width: 1440px) {
+  .container {
+    max-width: 520px;
+    padding: 2.5rem 3rem;
+  }
+}
+
+/* Very large screens */
+@media (min-width: 1441px) {
+  .container {
+    max-width: 600px;
+  }
+}
+
+    /* Tablets */
+    @media (max-width: 768px) {
+      .container {
+        padding: 1.7rem;
+        max-width: 320px;
+      }
+      h2 {
+        font-size: 1.6rem;
+      }
+      p {
+        font-size: 0.85rem;
+      }
+      input, button {
+        font-size: 0.9rem;
+      }
+    }
+
+    /* Small Phones */
+    @media (max-width: 420px) {
+      .container {
+        padding: 1.5rem;
+      }
+      h2 {
+        font-size: 1.5rem;
+      }
+      p {
+        font-size: 0.8rem;
+      }
+      button {
+        padding: 0.6rem 1.4rem;
+        font-size: 0.85rem;
+      }
+    }
+
+    /* Ultra Small Devices */
+    @media (max-width: 320px) {
+      h2 {
+        font-size: 1.3rem;
+      }
+      p {
+        font-size: 0.75rem;
+      }
+      button {
+        font-size: 0.8rem;
+        padding: 0.5rem 1.2rem;
+      }
+      input {
+        font-size: 0.85rem;
+        padding: 0.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Soft floating bubbles -->
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+
+  <div class="container">
+    <h2>OTP Verification</h2>
+    <p>A whisper awaits in your inbox...<br>Please enter the OTP to unlock it.</p>
+    <form method="POST">
+      <input type="text" name="otp" placeholder="Enter OTP" required><br>
+      <button type="submit">Verify</button>
+    </form>
+  </div>
+
+</body>
+</html>

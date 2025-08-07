@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Letter</title>
+</head>
+<body>
+    <h1>Write Your Letter</h1>
+    <form action="{{ url_for('create_letter') }}" method="POST">
+        <textarea name="letter" required></textarea>
+        <br>
+        <label>Profile Icon:</label>
+        <input type="text" name="profile_icon" placeholder="Enter profile icon URL" required>
+        <br>
+        <button type="submit">Submit Letter</button>
+    </form>
+</body>
+</html>

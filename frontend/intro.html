@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <title>Between the Moon and Words: A Journey of Unsent Letters</title>
+<link href="https://fonts.googleapis.com/css2?family=Petit+Formal+Script&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Tangerine&display=swap" rel="stylesheet">
+
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(to bottom, #0a0a2a, #1e1e4a, #3b2f4a); /* Ensures consistent violet sky */
+      overflow: hidden;
+      font-family: 'Tangerine', cursive;
+      height: 100vh;
+      width: 100vw;
+      position: relative;
+    }
+
+    #cinemaIntro {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 9999;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+    .paper-box, .typewriter-letter {
+    font-family: 'Tangerine', cursive;
+}
+
+    .animated-moon {
+  width: 15rem;  /* Default smaller size for larger screens */
+  height: 15rem;  /* Default smaller size for larger screens */
+  position: absolute;
+  border-radius: 50%;
+  top: 10%;
+  left: 70%;
+  background-image: url('https://www.solarsystemscope.com/textures/download/2k_moon.jpg');
+  background-size: 110% 100%;
+  animation-name: moonRotation;
+  animation-duration: 15s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-fill-mode: forwards !important;
+  box-shadow: 
+    inset -10px 8px 6px -5px #ffffff, 
+    inset 20px -20px 50px 43px rgba(0, 0, 0, 0.9), 
+    7px -6px 14px rgba(255, 255, 255, 0.3215686275);
+}
+/* Moon rotation animation */
+@keyframes moonRotation {
+  0% { background-position: 0% 0%; }
+  50% { background-position: 150% 0%; }
+  100% { background-position: 300% 0%; }
+}
+
+
+/* Adjusting for different screen sizes */
+
+/* For small screens (mobile devices, <= 360px) */
+@media (max-width: 360px) {
+  .animated-moon {
+    width: 3rem;  /* Smaller moon size for very small devices */
+    height: 3rem;  /* Smaller moon size for very small devices */
+    top: 5%;
+    left: 60%;
+  }
+}
+
+/* For medium screens (<= 420px) */
+@media (max-width: 420px) {
+  .animated-moon {
+    width: 5rem;  /* Small moon size for mobile devices */
+    height: 5rem;  /* Small moon size for mobile devices */
+    top: 7%;
+    left: 62%;
+  }
+}
+
+/* For tablet size screens (<= 768px) */
+@media (max-width: 768px) {
+  .animated-moon {
+    width: 14rem;  /* Small moon size for tablets */
+    height: 14rem;  /* Small moon size for tablets */
+    top: 8%;
+    left: 65%;
+  }
+}
+
+/* For larger tablets or small laptops (<= 1028px) */
+@media (max-width: 1028px) {
+  .animated-moon {
+    width: 16rem;  /* Slightly larger but still small moon for laptops */
+    height: 16rem;  /* Slightly larger but still small moon for laptops */
+    top: 8%;
+    left: 68%;
+  }
+}
+
+/* For larger screens (desktops, >= 1028px) */
+@media (min-width: 1029px) {
+  .animated-moon {
+    width: 18rem;  /* Smallest moon size for larger screens */
+    height: 18rem;  /* Smallest moon size for larger screens */
+    top: 10%;
+    left: 70%;
+  }
+}
+
+    .stars-wrapper {
+      position: relative;
+      pointer-events: none;
+      width: 100vw;
+      height: 100vh;
+      background: linear-gradient(#1e0d39, #3c2264, #5f4c8b);
+      overflow: hidden;
+    }
+
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: twinkle 4s ease-in-out infinite;
+    }
+
+    @keyframes twinkle {
+      25% {
+        opacity: 0;
+      }
+    }
+
+    .comet {
+      transform-origin: center center;
+      animation: comet 10s linear infinite;
+      z-index: 4;
+    }
+
+    @keyframes comet {
+      0%, 40% {
+        transform: translateX(0);
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      60%, 100% {
+        transform: translateX(-100vmax);
+        opacity: 0;
+      }
+    }
+
+    .lantern {
+  position: absolute;
+  bottom: -100px;
+  width: 50px;
+  height: 80px;
+  background: linear-gradient(to bottom, #ffb347 0%, #e25600 60%, #a83200 100%);
+  border-radius: 30% 30% 20% 20%;
+  box-shadow: 0 0 20px rgba(255, 200, 100, 0.5);
+  animation: floatLantern 14s ease-in infinite;
+  opacity: 0.8;
+  z-index: 1;
+}
+    @keyframes floatLantern {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.9;
+      }
+      100% {
+        transform: translateY(-140vh) scale(1.2);
+        opacity: 0;
+      }
+    }
+
+    .firefly {
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background: radial-gradient(circle, #ffee88 0%, #ffcc00 80%, transparent 100%);
+      border-radius: 50%;
+      animation: floatFirefly 6s infinite ease-in-out;
+      opacity: 0.8;
+      z-index: 1;
+    }
+
+    @keyframes floatFirefly {
+      0% {
+        transform: translateY(0px) scale(1);
+        opacity: 0.7;
+      }
+      50% {
+        transform: translateY(-80px) scale(1.2);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(0px) scale(1);
+        opacity: 0.5;
+      }
+    }
+
+    .bird-flight {
+      position: absolute;
+      top: 25%;
+      left: -120px;
+      width: 10vw;
+      height: 6vh;
+      animation: flyBird 12s ease-in-out 2s forwards;
+      z-index: 4;
+    }
+
+    @keyframes flyBird {
+      0% {
+        left: -120px;
+        top: 30%;
+        transform: scale(0.6);
+        opacity: 1;
+      }
+      60% {
+        left: 45%;
+        top: 20%;
+        transform: scale(0.8);
+      }
+      100% {
+        left: 120%;
+        top: 25%;
+        transform: scale(1);
+        opacity: 0;
+      }
+    }
+
+    .bird-body {
+      width: 6vw;
+      height: 4vh;
+      background: #ccc;
+      border-radius: 30px 30px 15px 15px;
+      position: relative;
+      transform: rotate(10deg);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+    }
+
+    .wing {
+      width: 3vw;
+      height: 3vh;
+      background: #aaa;
+      border-radius: 50%;
+      position: absolute;
+      top: -10px;
+      z-index: -1;
+      animation: flap 0.5s infinite alternate;
+    }
+
+    .left-wing {
+      left: -15px;
+      transform: rotate(-30deg);
+    }
+
+    .right-wing {
+      right: -15px;
+      transform: rotate(30deg);
+    }
+
+    @keyframes flap {
+      from {
+        transform: rotate(-20deg);
+      }
+      to {
+        transform: rotate(20deg);
+      }
+    }
+
+    /* Letter Box Styling */
+     .paper-drop {
+      position: absolute;
+      
+      top: 50px;
+      left: 50%;
+      width: 5vw;
+      height: 3vh;
+      background: #fdf6e3;
+      border: 1px solid #c9b089;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      opacity: 0; /* Start with zero opacity */
+      animation: dropLetter 3s ease-out 3s forwards; /* Start animation after 3s delay */
+      transform: rotate(5deg);
+    }
+
+     @keyframes dropLetter {
+      0% {
+        opacity: 0;
+        top: 50px;
+        transform: rotate(5deg);
+      }
+      100% {
+        opacity: 1;
+        top: 30vh;
+        transform: rotate(25deg);
+      }
+    }
+     .paper-box {
+  position: absolute;
+  top: 55%; 
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 25%; /* Adjust the width for better wrapping */
+  max-width: 600px;
+  background: rgba(255, 248, 220, 0.07);
+  border: 1px solid #462c0e;
+  border-radius: 16px;
+  color: #f5a623;
+  font-family: 'Tangerine', cursive;
+  font-size: 1.5em;
+  line-height: 1.8; /* Increase line height for better spacing */
+  text-align: center;
+  padding: 40px 30px;
+  opacity: 0;
+  box-shadow: 0 0 30px rgba(255, 235, 180, 0.2);
+  animation: fadeInBox 3s ease-in 10s forwards;
+  z-index: 10;
+  overflow-y: auto;
+  word-wrap: break-word; /* Prevents words from breaking inappropriately */
+  word-break: normal; /* Ensures words don't break randomly */
+  white-space: pre-wrap; /* Ensures line breaks and wrapping work properly */
+  hyphens: auto; /* Allow automatic hyphenation */
+  max-height: 70vh; /* Adjust max height to control container size */
+}
+
+
+    @keyframes fadeInBox { to { opacity: 1; } }
+   
+    #enterBtn {
+      position: absolute;
+      bottom: 50px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(44, 36, 27, 0.2);
+      border: 2px solid #e9c89f;
+      color: #fce9cc;
+      padding: 12px 26px;
+      font-family: 'Petit Formal Script', cursive;
+
+      font-size: 1.4em;
+      border-radius: 8px;
+      cursor: pointer;
+      text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+      opacity: 0;
+      animation: fadeInBox 1.5s ease-in 12s forwards;
+      z-index: 10;
+      transition: all 0.3s ease;
+    }
+    /* Hover effect */
+    #enterBtn:hover {
+      background: rgba(255, 180, 130, 0.5);
+      transform: scale(1.1);
+      box-shadow: 0 0 20px rgba(255, 200, 100, 0.7);
+    }
+     @keyframes fadeInBox {
+      to { opacity: 1; }
+    }
+
+   
+    @keyframes pulseGlow {
+      0%,100% { box-shadow: 0 0 12px rgba(255,240,200,0.3); }
+      50% { box-shadow: 0 0 18px rgba(255,240,200,0.6); }
+    }
+    /* Text Styling */
+    .typewriter-letter {
+      color: #f5a623;
+       font-family: 'Tangerine', cursive;
+      font-size: 1.5em;
+      line-height: 1.8;
+    }
+
+    .typewriter-letter span {
+      opacity: 0;
+      display: inline-block;
+      animation: typeFade 0.04s ease forwards;
+    }
+     @keyframes typeFade { to { opacity: 1; } }
+
+    /* Bird flying animation */
+    .bird {
+      background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/174479/bird-cells-new.svg');
+      filter: invert(35%) sepia(60%) saturate(500%) hue-rotate(170deg) brightness(110%) contrast(95%);
+      background-size: auto 100%;
+      width: 88px;
+      height: 125px;
+      will-change: background-position;
+      animation-name: fly-cycle;
+      animation-timing-function: steps(10);
+      animation-iteration-count: infinite;
+    }
+
+    .bird-one {
+      animation-duration: 1s;
+      animation-delay: -0.5s;
+      /* Custom modification for bird-one */
+      animation-name: fly-cycle-one; /* New animation name for bird-one */
+    }
+
+    .bird-two {
+      animation-duration: 0.9s;
+      animation-delay: -0.75s;
+    }
+
+    .bird-three {
+      animation-duration: 1.25s;
+      animation-delay: -0.25s;
+    }
+
+    .bird-four {
+      animation-duration: 1.1s;
+      animation-delay: -0.5s;
+    }
+
+    .bird-container {
+      position: absolute;
+      top: 10%;
+      left: -3%;
+      transform: scale(0) translateX(-10vw);
+      will-change: transform;
+      animation-name: fly-right-one;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+
+    .bird-container-one {
+      animation-duration: 15s;
+      animation-delay: 0;
+    }
+
+    .bird-container-two {
+      animation-duration: 16s;
+      animation-delay: 1s;
+    }
+
+    .bird-container-three {
+      animation-duration: 14.6s;
+      animation-delay: 9.5s;
+    }
+
+    .bird-container-four {
+      animation-duration: 16s;
+      animation-delay: 10.25s;
+    }
+
+    @keyframes fly-cycle {
+      100% {
+        background-position: -900px 0;
+      }
+    }
+
+    /* Custom animation for bird-one */
+    @keyframes fly-cycle-one {
+      100% {
+        background-position: -900px 0;
+      }
+    }
+
+    @keyframes fly-right-one {
+      0% {
+        transform: scale(0.3) translateX(-10vw);
+      }
+
+      10% {
+        transform: translateY(2vh) translateX(10vw) scale(0.4);
+      }
+
+      20% {
+        transform: translateY(0vh) translateX(30vw) scale(0.5);
+      }
+
+      30% {
+        transform: translateY(4vh) translateX(50vw) scale(0.6);
+      }
+
+      40% {
+        transform: translateY(2vh) translateX(70vw) scale(0.6);
+      }
+
+      50% {
+        transform: translateY(0vh) translateX(90vw) scale(0.6);
+      }
+
+      60% {
+        transform: translateY(0vh) translateX(110vw) scale(0.6);
+      }
+
+      100% {
+        transform: translateY(0vh) translateX(110vw) scale(0.6);
+      }
+    }
+
+    @keyframes fly-right-two {
+      0% {
+        transform: translateY(-2vh) translateX(-10vw) scale(0.5);
+      }
+
+      10% {
+        transform: translateY(0vh) translateX(10vw) scale(0.4);
+      }
+
+      20% {
+        transform: translateY(-4vh) translateX(30vw) scale(0.6);
+      }
+
+      30% {
+        transform: translateY(1vh) translateX(50vw) scale(0.45);
+      }
+
+      40% {
+        transform: translateY(-2.5vh) translateX(70vw) scale(0.5);
+      }
+
+      50% {
+        transform: translateY(0vh) translateX(90vw) scale(0.45);
+      }
+
+      51% {
+        transform: translateY(0vh) translateX(110vw) scale(0.45);
+      }
+
+      100% {
+        transform: translateY(0vh) translateX(110vw) scale(0.45);
+      }
+    }
+    /* Ensuring mobile responsiveness for the moon, paper box, lanterns, and enter button */
+   /* Ensuring mobile responsiveness for the moon, paper box, lanterns, and enter button */
+@media (max-width: 768px) {
+  .moon {
+    width: 20vw;
+    height: 20vw;
+    top: 10vh;
+    right: 10vw;
+  }
+
+  .lantern {
+    width: 12vw;
+    height: 15vh;
+  }
+
+  .bird-flight {
+    width: 15vw;
+    height: 10vh;
+  }
+
+  .paper-box {
+    width: 85%;
+    font-size: 1em;
+    padding: 20px 15px;
+    position: absolute;
+    top: 30%; /* Adjust the vertical position */
+    left: 50%;
+    transform: translateX(-50%);
+    max-height: 60vh;
+   overflow-y: auto;
+  word-wrap: break-word; /* Prevents words from breaking inappropriately */
+  white-space: pre-line;
+  }
+
+ #enterBtn {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.9em; /* Reduce font size */
+    padding: 10px 25px; /* Adjust padding to fit text */
+    top: 80%; /* Position button below paper box */
+    min-width: 140px; /* Ensure button has a minimum width */
+    text-align: center; /* Ensure text is centered */
+    white-space: nowrap; /* Prevent text from wrapping */
+  }
+}
+/* For tablet size screens (<= 768px) */
+@media (max-width: 768px) {
+  .moon {
+    width: 15vw; /* Slightly smaller for tablet devices */
+    height: 15vw;
+    top: 10vh;
+    right: 10vw;
+  }
+
+  .lantern {
+    width: 10vw;  /* Slightly smaller lanterns */
+    height: 13vh;
+  }
+
+  .bird-flight {
+    width: 12vw;
+    height: 8vh;
+  }
+
+  .paper-box {
+    width: 80%;  /* Reduced width for tablets */
+    font-size: 1.1em;  /* Slightly larger font size for better readability */
+    padding: 20px 15px;
+    position: absolute;
+    top: 25%;  /* Adjust top position slightly */
+    left: 50%;
+    transform: translateX(-50%);
+    max-height: 60vh;
+    overflow-y: auto;  /* Allow scrolling if content is long */
+  }
+
+  #enterBtn {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.1em;  /* Increase font size slightly for tablets */
+    padding: 12px 28px;  /* Adjust padding */
+    top: 80%; /* Position button below paper box */
+    min-width: 150px; /* Ensure button has a minimum width */
+    text-align: center; /* Ensure text is centered */
+    white-space: nowrap; /* Prevent text from wrapping */
+  }
+}
+
+/* Default styles (applies to larger screens) */
+.paper-box {
+  width: 35%; /* Default width for large screens */
+  max-width: 600px;
+}
+
+.moon {
+  width: 18rem; /* Larger moon for large screens */
+  height: 18rem;
+}
+
+.lantern {
+  width: 50px;
+  height: 80px;
+}
+
+.bird-flight {
+  width: 10vw;
+  height: 6vh;
+}
+
+/* Media Queries for different screen sizes */
+
+/* 2560px (Large Desktop) */
+@media (max-width: 2560px) {
+  .paper-box {
+    width: 25%; /* Reduce width */
+    font-size: 1.5em;
+  }
+
+  .moon {
+    width: 16rem;
+    height: 16rem;
+  }
+
+  .lantern {
+    width: 60px;
+    height: 90px;
+  }
+
+  .bird-flight {
+    width: 8vw;
+    height: 5vh;
+  }
+
+  #enterBtn {
+    font-size: 1.6em;
+  }
+}
+
+/* 1440px (Desktop) */
+@media (max-width: 1440px) {
+  .paper-box {
+    width: 30%; /* Slightly larger width */
+    font-size: 1.4em;
+  }
+
+  .moon {
+    width: 14rem;
+    height: 14rem;
+  }
+
+  .lantern {
+    width: 55px;
+    height: 85px;
+  }
+
+  .bird-flight {
+    width: 7vw;
+    height: 5vh;
+  }
+
+  #enterBtn {
+    font-size: 1.5em;
+  }
+}
+
+/* 1024px (Tablet) */
+@media (max-width: 1024px) {
+  .paper-box {
+    width: 50%; /* Reduce the width further for tablet */
+    font-size: 1.3em;
+  }
+
+  .moon {
+    width: 12rem;
+    height: 12rem;
+  }
+
+  .lantern {
+    width: 45px;
+    height: 70px;
+  }
+
+  .bird-flight {
+    width: 6vw;
+    height: 4vh;
+  }
+
+  #enterBtn {
+    font-size: 1.4em;
+  }
+}
+
+/* 768px (Large mobile devices) */
+@media (max-width: 768px) {
+  .paper-box {
+    width: 60%; /* Reduce the width further for mobile */
+    font-size: 1.2em;
+  }
+
+  .moon {
+    width: 10rem;
+    height: 10rem;
+  }
+
+  .lantern {
+    width: 40px;
+    height: 60px;
+  }
+
+  .bird-flight {
+    width: 5vw;
+    height: 3vh;
+  }
+
+  #enterBtn {
+    font-size: 1.3em;
+  }
+}
+
+/* 425px (Small mobile devices) */
+@media (max-width: 425px) {
+  .paper-box {
+    width: 70%; /* Wider for smaller devices */
+    font-size: 1.1em;
+  }
+
+  .moon {
+    width: 8rem;
+    height: 8rem;
+  }
+
+  .lantern {
+    width: 35px;
+    height: 55px;
+  }
+
+  .bird-flight {
+    width: 4vw;
+    height: 2.5vh;
+  }
+
+  #enterBtn {
+    font-size: 1.2em;
+  }
+}
+
+/* 375px (Small mobile devices) */
+@media (max-width: 375px) {
+  .paper-box {
+    width: 75%; /* Further reduce width */
+    font-size: 1em;
+  }
+
+  .moon {
+    width: 7rem;
+    height: 7rem;
+  }
+
+  .lantern {
+    width: 30px;
+    height: 50px;
+  }
+
+  .bird-flight {
+    width: 3vw;
+    height: 2vh;
+  }
+
+  #enterBtn {
+    font-size: 1.1em;
+  }
+}
+
+/* 320px (Extra small mobile devices) */
+@media (max-width: 320px) {
+  .paper-box {
+    width: 80%; /* Max width for small screens */
+    font-size: 0.9em;
+  }
+
+  .moon {
+    width: 6rem;
+    height: 6rem;
+  }
+
+  .lantern {
+    width: 25px;
+    height: 45px;
+  }
+
+  .bird-flight {
+    width: 2vw;
+    height: 1.5vh;
+  }
+
+  #enterBtn {
+    font-size: 1em;
+  }
+}
+
+
+
+
+  </style>
+</head>
+<body>
+  <div id="cinemaIntro">
+    <div class="moon"></div>
+  <!---->  <div id="stars-group-1"></div>
+    <div id="stars-group-2"></div>
+    <div id="stars-group-3"></div>
+    <div id="stars-group-4"></div>
+    <div id="stars-group-5"></div>
+    <div id="stars-group-6"></div>
+    <div class="animated-moon"></div>
+    
+
+
+    <script>
+      const container = document.getElementById('cinemaIntro');
+
+      // Generate 200 stars dynamically
+      for (let i = 0; i < 200; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        star.style.top = `${Math.random() * 100}%`;
+        star.style.left = `${Math.random() * 100}%`;
+        container.appendChild(star);
+      }
+
+      // Generate falling stars
+      const fallingStar = document.createElement('div');
+      fallingStar.className = 'falling-star';
+      fallingStar.style.top = '0px';
+      fallingStar.style.left = `${Math.random() * 80 + 10}%`;
+      container.appendChild(fallingStar);
+
+      // Generate lanterns
+      for (let i = 0; i < 10; i++) {
+        const lantern = document.createElement('div');
+        lantern.className = 'lantern';
+        lantern.style.left = `${Math.random() * 90 + 5}%`;
+        lantern.style.animationDelay = `${i * 2}s`;
+        container.appendChild(lantern);
+      }
+
+      // Generate fireflies
+      for (let i = 0; i < 25; i++) {
+        const firefly = document.createElement('div');
+        firefly.className = 'firefly';
+        firefly.style.top = `${Math.random() * 100}%`;
+        firefly.style.left = `${Math.random() * 100}%`;
+        container.appendChild(firefly);
+      }
+    </script>
+
+    <!-- Comets -->
+    <svg class="comet" width="100%" height="100%" preserveAspectRatio="none">
+      <defs>
+        <radialGradient id="comet-gradient" cx="0" cy=".5" r="0.5">
+          <stop offset="0%" stop-color="rgba(255,255,255,.8)" />
+          <stop offset="100%" stop-color="rgba(255,255,255,0)" />
+        </radialGradient>
+      </defs>
+      <g transform="rotate(-135)">
+        <ellipse class="comet comet-a" fill="url(#comet-gradient)" cx="0" cy="0" rx="150" ry="2" />
+      </g>
+      <g transform="rotate(20)">
+        <ellipse class="comet comet-b" fill="url(#comet-gradient)" cx="100%" cy="0" rx="150" ry="2" />
+      </g>
+      <g transform="rotate(300)">
+        <ellipse class="comet comet-c" fill="url(#comet-gradient)" cx="40%" cy="100%" rx="150" ry="2" />
+      </g>
+    </svg>
+
+     <div id="introLetter" class="paper-box typewriter-letter"></div>
+    <button id="enterBtn">🕯️ Begin Journey</button>
+  </div>
+  <script>
+
+ const intro = document.getElementById("cinemaIntro");
+const enterBtn = document.getElementById("enterBtn");
+const introLetter = document.getElementById("introLetter");
+
+const fullText = `Dear Stranger,
+
+Welcome to Unsent Letters — where 
+
+silence finds voice,and 
+
+the unsaid is remembered.
+
+Here, emotions live between
+
+the lines, and every letter
+
+is a soul untold.
+
+🕯️ Light your lantern.
+
+💌 Begin your journey.`;
+
+// Function to type out the letter text
+function typeLetter(text, target) {
+  target.innerHTML = ''; // Clear the previous content
+  let delay = 0;
+
+  // Split the text by newlines to handle each line separately
+  const lines = text.split("\n");
+
+  // Loop through each line of text
+  lines.forEach((line, index) => {
+    const lineDiv = document.createElement("div"); // Create a div for each line
+    let delayForLine = delay;
+
+    // Loop through each character in the line
+    for (let char of line) {
+      const span = document.createElement("span");
+
+      // Handle spaces
+      if (char === ' ') {
+        span.textContent = '\u00A0'; // Non-breaking space
+      } else {
+        span.textContent = char;
+      }
+
+      span.style.animationDelay = `${delayForLine}s`; // Apply animation delay
+      lineDiv.appendChild(span); // Append to the line
+      delayForLine += 0.04; // Increment the delay for each character
+    }
+
+    target.appendChild(lineDiv); // Append the line to the target container
+    delay += 0.5; // Add a delay before the next line
+  });
+}
+
+setTimeout(() => typeLetter(fullText, introLetter), 10000);
+
+
+
+    enterBtn.addEventListener("click", () => {
+      intro.style.transition = "opacity 1s ease";
+      intro.style.opacity = 0;
+      setTimeout(() => {
+        window.location.href = "/register";
+      }, 1000);
+    });
+  </script>
+   <!-- Bird Flying -->
+    <div class="bird-container bird-container-one">
+      <div class="bird bird-one"></div>
+    </div>
+    <div class="bird-container bird-container-two">
+      <div class="bird bird-two"></div>
+    </div>
+    <div class="bird-container bird-container-three">
+      <div class="bird bird-three"></div>
+    </div>
+    <div class="bird-container bird-container-four">
+      <div class="bird bird-four"></div>
+    </div>
+
+</body>
+</html>

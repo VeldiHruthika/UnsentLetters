@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Words That Endure</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Playball&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
+
+ <style>
+  /* Base Setup */
+  body {
+    margin: 0;
+    padding: 50px;
+    font-family: 'Playball', cursive;
+
+    background: linear-gradient(135deg, #1a0e17, #0b0509); /* Deep plum to black */
+  color: #f2e6e9; /* Rose ash / soft ivory */
+    overflow-x: hidden;
+    position: relative;
+    animation: fadeIn 2s ease-out;
+  }
+
+  /* Heartbeat fade-in effect */
+  @keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(50px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Title with romantic love glow */
+  h2 {
+    text-align: center;
+    font-size: 42px;
+    color:#A31621; /* Blood red */
+    margin-bottom: 50px;
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 0 30px rgba(255, 0, 0, 0.3);
+    animation: pulse 1.5s ease-out infinite alternate;
+  }
+
+  @keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 1.2; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  /* Filter dropdown with love */
+  select {
+    background: rgba(34, 24, 29, 0.85);
+    color: #f2e6e9;
+  border: 2px solid #77223c;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-size: 18px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: background 0.3s ease, transform 0.3s ease;
+    margin-bottom: 40px;
+  }
+
+  select:hover {
+  background: #33141f;
+  border-color: #A31621;
+  transform: translateY(-2px);
+}
+
+  /* Romantic letter card */
+  .letter-card {
+    background: rgba(25, 15, 20, 0.95);
+  border-left: 5px solid #A31621;
+    padding: 30px;
+    margin-bottom: 40px;
+    border-radius: 20px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    animation: floatIn 1.2s ease-out forwards;
+     max-width: 100%; /* Ensure cards are responsive */
+  box-sizing: border-box;
+  }
+  /* Audio Player */
+audio {
+  width: 100%; /* Make the audio player span the entire width of the card */
+  margin-top: 15px;
+  border-radius: 10px; /* Rounded corners for a softer look */
+  background-color: rgba(240, 240, 240, 0.8); /* Subtle background color */
+  padding: 5px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+  @keyframes floatIn {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Hover effect for card - to feel more alive */
+  .letter-card:hover {
+    transform: scale(1.03); /* Card zoom effect */
+    box-shadow: 0 0 30px rgba(255, 0, 50, 0.4); /* Heartbeat shadow glow */
+    background-color: rgba(30, 20, 30, 1);
+  }
+
+  /* Text content */
+  .letter-card p {
+    font-size: 20px;
+    line-height: 1.8;
+    color: #f2e6e9;
+    margin-bottom: 15px;
+  }
+
+  .letter-card h3 {
+    font-size: 26px;
+    color: #F44336;
+    margin-bottom: 15px;
+    font-weight: bold;
+  }
+
+  .letter-meta {
+    font-size: 16px;
+    color: #a8849c;
+    margin-bottom: 15px;
+  }
+
+  /* Reply Box */
+  .reply-box {
+    background: rgba(60, 30, 45, 0.9);
+    padding: 20px;
+    margin-top: 20px;
+    border-left: 5px solid #A31621;
+    border-radius: 10px;
+    font-style: italic;
+    color: #f8e3e8;
+  box-shadow: inset 0 0 15px rgba(255, 0, 50, 0.2);
+    animation: replyFadeIn 1.5s ease-out forwards;
+  }
+  .reply-box strong {
+  color: #ff9aad;
+}
+
+
+  @keyframes replyFadeIn {
+    0% { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Locked Message */
+  .locked-msg {
+    background-color: rgba(40, 20, 30, 0.9);
+  padding: 20px;
+  border-left: 5px solid #8B3A62;
+    border-radius: 10px;
+    font-style: italic;
+    color: #3B1D31;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    animation: replyFadeIn 1.5s ease-out forwards;
+  }
+
+  /* Buttons with heart-shaped glow */
+  .letter-actions button {
+    margin-right: 18px;
+    background: linear-gradient(135deg, #5C1F33, #A31621);
+    color: #fff;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 18px;
+    font-family: 'Merriweather', serif;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  }
+
+  .letter-actions button:hover {
+    background: linear-gradient(135deg,  #A31621, #5C1F33);
+    box-shadow: 0 0 18px rgba(255, 0, 0, 0.5); /* Glow effect */
+    transform: scale(1.05); /* Slight zoom effect */
+  }
+
+  /* Romantic floating hearts animation */
+  @keyframes heartsFloat {
+    0% { transform: translateY(0); opacity: 0.8; }
+    50% { transform: translateY(-20px); opacity: 1; }
+    100% { transform: translateY(0); opacity: 0.8; }
+  }
+
+  .hearts {
+    position: absolute;
+    top: 20%;
+    right: 10%;
+    animation: heartsFloat 3s ease-in-out infinite;
+  }
+
+  .hearts img {
+    width: 30px;
+    height: 30px;
+    animation: heartsFloat 3s ease-in-out infinite;
+  }
+
+
+
+
+
+
+/* Profile Avatar Section */
+    .profile-avatar {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .profile-avatar img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      box-shadow: 0 0 8px rgba(0,0,0,0.4);
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .profile-avatar img:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 12px rgba(255, 204, 153, 0.8);
+    }
+
+
+  /* For the full letter expansion */
+  .fullscreen-letter {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 90vw;
+  max-width: 800px;
+  max-height: 90vh;
+  background: rgba(25, 15, 20, 0.98);
+  z-index: 9999;
+  overflow-y: auto;
+  padding: 20px;
+  box-sizing: border-box;
+  display: none;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  border-radius: 16px;
+  transform: translate(-50%, -50%);
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.fullscreen-letter.visible {
+  display: flex;
+}
+
+  @keyframes burnEffect {
+  0% {
+    opacity: 1;
+    filter: none;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    filter: brightness(1.3) sepia(0.7);
+    transform: scale(1.05) rotate(-1deg);
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.9) rotate(2deg);
+    filter: blur(4px);
+  }
+}
+
+.burning {
+  animation: burnEffect 1.2s forwards ease-out;
+  pointer-events: none;
+}
+/* Falling ash animation */
+.ash {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: rgba(80, 40, 30, 0.6);
+  border-radius: 50%;
+  opacity: 0.7;
+  animation: fallAsh 2.5s linear forwards;
+  pointer-events: none;
+}
+
+@keyframes fallAsh {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(200px) scale(0.3);
+    opacity: 0;
+  }
+}
+
+/* Spark burst overlay */
+.spark {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background: radial-gradient(circle, #ffb347 10%, rgba(0, 0, 0, 0) 70%);
+  opacity: 0.8;
+  animation: sparkPop 1s ease-out forwards;
+  border-radius: 50%;
+}
+
+@keyframes sparkPop {
+  0% { transform: scale(0.3); opacity: 1; }
+  80% { transform: scale(1.5); opacity: 0.6; }
+  100% { transform: scale(2); opacity: 0; }
+}
+
+/* Close button */
+.close-btn {
+  background: #A31621;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+}
+
+/* Zoom controls container */
+.zoom-controls {
+  display: flex; /* Align buttons side by side */
+  justify-content: flex-start; /* Align items to the start */
+  gap: 10px; /* Space between buttons */
+  position: absolute;
+  top: 10px;
+  right: 10px; /* Adjust if needed */
+  z-index: 10001;
+}
+
+/* Zoom buttons */
+.zoom-controls button,
+.close-btn {
+  background: rgba(255, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+  width: 40px; /* Same width for all buttons */
+  height: 40px; /* Same height for all buttons */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Hover effect for zoom buttons */
+.zoom-controls button:hover,
+.close-btn:hover {
+  background: rgba(255, 0, 0, 0.7);
+}
+
+/* Phones (portrait) <= 480px */
+@media (max-width: 480px) {
+  .fullscreen-letter {
+    width: 95vw;
+    max-width: 95vw;
+    padding: 18px;
+  }
+}
+
+/* Phones (landscape) and small tablets */
+@media (min-width: 481px) and (max-width: 768px) {
+  .fullscreen-letter {
+    width: 92vw;
+    max-width: 92vw;
+    padding: 20px;
+  }
+}
+
+/* Tablets and small laptops */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .fullscreen-letter {
+    width: 88vw;
+    max-width: 88vw;
+    padding: 22px;
+  }
+}
+
+/* Large laptops and desktops */
+@media (min-width: 1025px) and (max-width: 1366px) {
+  .fullscreen-letter {
+    width: 80vw;
+    max-width: 800px;
+  }
+}
+
+/* Very large desktops */
+@media (min-width: 1367px) {
+  .fullscreen-letter {
+    width: 70vw;
+    max-width: 800px;
+  }
+}
+
+/* Locked state */
+#capsule.locked {
+  background-color: #ccc;
+  color: #333;
+}
+
+/* Unlocked state */
+#capsule.unlocked {
+  background-color: #4CAF50; /* Green background for unlocked */
+  color: white;
+}
+
+</style>
+</head>
+<body>
+  <!-- Profile Avatar Link (at the top-right corner) -->
+<div class="profile-avatar">
+    <a href="{{ url_for('profile') }}">
+        <img id="userAvatarDisplay" 
+             src="{{ url_for('serve_avatar', filename=(data.avatar if data.avatar else 'default_avatar.png')) }}" 
+             alt="Profile Avatar" class="avatar-icon">
+    </a>
+</div>
+
+  <div style="margin-bottom: 20px; text-align: center;">
+    <label>🎭 Filter by Mood:</label>
+    <select id="moodFilter" onchange="filterLettersByMood()">
+      <option value="all">All</option>
+      <option value="lost-love">💔 Lost Love</option>
+      <option value="closure">🌫️ Closure</option>
+      <option value="anger">🔥 Anger</option>
+      <option value="goodbye">🌙 Goodbye</option>
+    </select>
+  </div>
+
+  <h2>📜 Your Saved Letters</h2>
+  <p id="letterCount" style="text-align:center; font-size:20px; color:#6C1A3E; margin-bottom: 30px;">Loading letters...</p>
+
+  <div id="letters-container"></div>
+
+  <div id="burnConfirm" style="display:none; position: fixed; top: 0; left: 0; right:0; bottom: 0; background: rgba(0,0,0,0.6); z-index: 9999; justify-content: center; align-items: center;">
+  <div style="background: #fff0f3; color: #3B1D31; padding: 30px 40px; border-radius: 18px; box-shadow: 0 0 30px rgba(255, 0, 0, 0.3); font-family: 'Playball', cursive; text-align: center; max-width: 400px;">
+    <p style="font-size: 20px;">🔥 Are you sure you want to <strong>burn</strong> this letter forever?</p>
+    <button onclick="confirmBurn()" style="margin: 10px; background: #c70039; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer;">Yes, Burn it</button>
+    <button onclick="cancelBurn()" style="margin: 10px; background: #888; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer;">Cancel</button>
+
+  </div>
+  <div id="capsule" class="locked">
+  <!-- The locked capsule view -->
+  <p>Your capsule is locked. Come back later!</p>
+
+    <div id="capsule-content" style="display: none;">
+    <!-- The unlocked capsule content -->
+    <h2>Your Time Capsule is now unlocked!</h2>
+    <p>Here's your message...</p>
+  </div>
+
+</div>
+
+</div>
+<!-- 🔥 Ashes and Sparks Container -->
+<div id="burnOverlayContainer" style="pointer-events:none; position:fixed; top:0; left:0; width:100vw; height:100vh; z-index:9998;"></div>
+
+  <script>
+// Function to zoom in the letter content and AI reply
+function zoomIn(elementIds) {
+  elementIds.forEach(id => {
+    const element = document.querySelector(`#${id}`);
+    if (element) {
+      const currentSize = parseFloat(window.getComputedStyle(element).fontSize);
+      element.style.fontSize = `${currentSize * 1.2}px`; // Increase the font size by 20%
+    }
+  });
+}
+
+// Function to zoom out the letter content and AI reply
+function zoomOut(elementIds) {
+  elementIds.forEach(id => {
+    const element = document.querySelector(`#${id}`);
+    if (element) {
+      const currentSize = parseFloat(window.getComputedStyle(element).fontSize);
+      element.style.fontSize = `${currentSize / 1.2}px`; // Decrease the font size by 20%
+    }
+  });
+}
+
+
+
+    // Function to fetch saved letters and display them dynamically
+    function fetchSavedLetters() {
+      fetch('/saved-letters')
+        .then(res => res.json())
+        .then(letters => {
+          const container = document.getElementById('letters-container');
+          const countEl = document.getElementById('letterCount');
+          if (letters.length === 0) {
+            container.innerHTML = '<p>No saved letters found.</p>';
+            countEl.textContent = 'You have 0 letters.';
+            return;
+          }
+          countEl.textContent = `You have ${letters.length} letter${letters.length > 1 ? 's' : ''}.`;
+          container.innerHTML = '';
+          
+          letters.forEach(letter => {
+           
+            const card = document.createElement('div');
+           card.className = 'letter-card letter-entry';
+card.setAttribute('data-id', letter.id); // <-- Add this
+card.setAttribute('data-mood', letter.mood || 'unknown');
+
+            const meta = document.createElement('div');
+            meta.className = 'letter-meta';
+            if (letter.avatar) {
+              meta.innerHTML = `
+                <img src="assets/avatars/${letter.avatar}" style="width:30px; height:30px; border-radius:50%; vertical-align:middle; margin-right:8px;">
+                ${letter.profile_icon || "👤"} | ${letter.timestamp || letter.created_at}
+              `;
+            } else {
+              meta.textContent = `${letter.profile_icon || "👤"} | ${letter.timestamp || letter.created_at}`;
+            }
+
+            let contentHTML = '';
+            const letterDate = new Date(letter.open_date);
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            letterDate.setHours(0, 0, 0, 0);
+            const isLocked = letter.is_time_capsule && letterDate > today;
+            
+
+             if (isLocked) {
+              contentHTML = `
+                <div class="locked-msg">
+                  🔒 This Time Capsule will open on <strong>${letter.open_date}</strong>.
+                </div>
+              `;
+            } else if (letter.type === 'voice') {
+              const voiceData = letter.voice_path;
+              contentHTML = `
+                <h3>${letter.title || 'Untitled Voice Capsule'}</h3>
+                <p>${letter.letter}</p>
+                ${voiceData ? `<audio controls src="${voiceData}"></audio>` : '<p><em>No audio found.</em></p>'}
+              `;
+            } else {
+  const previewText = letter.letter ? letter.letter.slice(0, 300) : 'No content available';
+  contentHTML = `
+    <p class="clickable-preview" style="cursor:pointer; color:#ffc;">
+      ${previewText}... <em>(Click to read more)</em>
+    </p>
+  `;
+}
+
+            const actions = document.createElement('div');
+            actions.className = 'letter-actions';
+
+            const burnBtn = document.createElement('button');
+            burnBtn.textContent = '🔥 Burn';
+            if (letter.type === 'voice') {
+    burnBtn.onclick = () => deleteVoiceCapsule(letter.id);  // For voice capsules, treat burn as delete
+  } else {
+    burnBtn.onclick = () => burnLetter(letter.id);  // For text letters
+  }
+            burnBtn.style.background = '#c70039'; // Dark red for burn action
+            actions.appendChild(burnBtn);       
+            card.appendChild(meta);
+            card.innerHTML += contentHTML;
+            card.appendChild(actions);
+            container.appendChild(card);
+
+            
+
+            // Add click event to toggle full content visibility
+            const preview = card.querySelector('.clickable-preview');
+if (preview) {
+  preview.addEventListener('click', () => {
+    const fullscreenContainer = document.createElement('div');
+    fullscreenContainer.className = 'fullscreen-letter visible';
+
+    const closeBtn = document.createElement('button');
+    closeBtn.className = 'close-btn';
+    closeBtn.innerHTML = '&times;';
+    closeBtn.onclick = () => fullscreenContainer.remove();
+const fullContent = document.createElement('div');
+fullContent.innerHTML = `
+  <div class="letter-meta">${meta.innerHTML}</div>
+  <h3>${letter.title || ''}</h3>
+  <p id="letterText" style="white-space: pre-wrap; font-size: 18px; line-height: 1.6;">${letter.letter}</p>
+  <div class="reply-box" id="reply-box">
+    <strong>💌 AI Reply:</strong><br>${letter.reply || '<em>No reply available.</em>'}
+  </div>
+`;
+
+// Add zoom controls
+const zoomControls = document.createElement('div');
+zoomControls.className = 'zoom-controls';
+zoomControls.innerHTML = `
+  <button id="zoomIn" onclick="zoomIn(['letterText', 'reply-box'])">+</button>
+  <button id="zoomOut" onclick="zoomOut(['letterText', 'reply-box'])">-</button>
+`;
+
+fullscreenContainer.appendChild(zoomControls);
+
+    fullscreenContainer.appendChild(closeBtn);
+    fullscreenContainer.appendChild(fullContent);
+    document.body.appendChild(fullscreenContainer);
+  });
+}
+
+  
+          });
+        });
+    }
+    
+
+    let letterToBurn = null;
+
+function burnLetter(id) {
+  // Find and store the card to burn
+  letterToBurn = document.querySelector(`[data-id="${id}"]`);
+  document.getElementById('burnConfirm').style.display = 'flex';
+}
+
+function cancelBurn() {
+  document.getElementById('burnConfirm').style.display = 'none';
+  letterToBurn = null;
+}
+
+function confirmBurn() {
+  if (!letterToBurn) return;
+
+  const id = letterToBurn.getAttribute('data-id');
+  document.getElementById('burnConfirm').style.display = 'none';
+
+  // 🔥 Add burn animation
+  letterToBurn.classList.add('burning');
+  
+  // Add ashes and sparks
+  createBurnEffects(letterToBurn);
+
+  setTimeout(() => {
+    fetch(`/burn-letter/${id}`, { method: 'POST' })
+      .then(res => {
+        if (res.status === 204) {
+          letterToBurn.remove(); // Remove from DOM after burn
+        }
+      });
+  }, 1200); // Wait for animation to complete
+} 
+function deleteVoiceCapsule(voiceId) {
+    fetch(`/delete-voice-capsule/${voiceId}`, {
+        method: 'POST',
+    })
+    .then(response => {
+        if (response.ok) {
+            alert('Voice Capsule Deleted Successfully');
+            // You can remove the item from the UI after deletion
+        } else {
+            alert('Failed to delete Voice Capsule');
+        }
+    })
+    .catch(error => {
+        console.error('Error deleting voice capsule:', error);
+    });
+}
+
+  // Function to delete a letter
+    function deleteLetter(id) {
+      fetch(`/delete-letter/${id}`, { method: 'POST' })
+        .then(res => {
+          if (res.status === 204) fetchSavedLetters();
+        });
+    }
+
+    window.onload = fetchSavedLetters;
+
+    // Function to filter letters by mood
+    function filterLettersByMood() {
+      const selectedMood = document.getElementById('moodFilter').value;
+      const allLetters = document.querySelectorAll('.letter-entry');
+      allLetters.forEach(letter => {
+        const mood = letter.getAttribute('data-mood');
+        letter.style.display = (selectedMood === 'all' || mood === selectedMood) ? 'block' : 'none';
+      });
+    }
+    function createBurnEffects(target) {
+  const overlay = document.getElementById('burnOverlayContainer');
+  const rect = target.getBoundingClientRect();
+
+  for (let i = 0; i < 15; i++) {
+    const ash = document.createElement('div');
+    ash.className = 'ash';
+    ash.style.left = `${rect.left + Math.random() * rect.width}px`;
+    ash.style.top = `${rect.top + Math.random() * rect.height}px`;
+    overlay.appendChild(ash);
+
+    setTimeout(() => ash.remove(), 2500);
+  }
+
+  const spark = document.createElement('div');
+  spark.className = 'spark';
+  spark.style.left = `${rect.left + rect.width / 2}px`;
+  spark.style.top = `${rect.top + rect.height / 2}px`;
+  overlay.appendChild(spark);
+  setTimeout(() => spark.remove(), 1000);
+}
+
+  </script>
+ <script>
+  // On page load, check if time capsule should open
+  document.addEventListener("DOMContentLoaded", function() {
+    fetch('/check-capsule-status')
+      .then(response => response.json())
+      .then(data => {
+        if (data.should_unlock) {
+          // Unlock and show the capsule
+          document.getElementById('capsule').classList.remove('locked');
+          // Or you can directly reveal the capsule's content if it's unlocked
+          document.getElementById('capsule-content').style.display = 'block'; 
+        } else {
+          // Show it as locked
+          document.getElementById('capsule').classList.add('locked');
+        }
+      })
+      .catch(err => console.error('Error checking capsule status:', err));
+  });
+</script>
+
+</body>
+</html>

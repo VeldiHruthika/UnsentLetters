@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Letters to the Future</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Georgia', serif;
+     overflow-y: auto; /* Allow scrolling if content overflows */
+      min-height: 100vh; /* Ensures the body always covers the full screen height */
+    }
+
+    /* Fullscreen video background */
+    video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1; /* Place behind the content */
+    }
+    /* Overlay with dark tint to make the text stand out */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1;
+    }
+    /* Time Capsule form container */
+    .capsule-container {
+    /*  min-height: 500px; Ensure enough space for all content */
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+      margin: 100px auto;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 30px;
+      border-radius: 14px;
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
+      color: #f2f2f2;
+        height: auto; /* Ensure the container has enough height */
+      overflow: visible; 
+    }
+    h4 {
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: bold;
+}
+    h2 {
+  font-family: 'Playball', cursive;
+  font-size: 32px;
+  color: #ffc777;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+    /* Inputs, buttons, and styling */
+    textarea, input, select {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      box-sizing: border-box;
+      background: #121212;
+      color: #fff;
+    }
+    button {
+      margin: 15px 0; /* Increase space between buttons */
+      background-color: #00bcd4;
+      color: #fff3e6;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+  
+    button:hover {
+      background-color: #a78300;
+    }
+    /* Add glow to the inputs and buttons */
+    input:focus, select:focus, button:focus {
+      outline: none;
+      box-shadow: 0 0 10px rgba(0, 188, 212, 0.7);
+    }
+    #recStatus {
+      margin-top: 10px;
+      font-size: 14px;
+      color: rgb(199, 158, 214);
+      text-align: center;
+    }
+    .starry {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    radial-gradient(white 1px, transparent 1px),
+    radial-gradient(#ccc 1px, transparent 1px);
+  background-size: 60px 60px, 100px 100px;
+  background-position: 0 0, 50px 50px;
+  opacity: 0.05;
+  z-index: 1;
+  animation: twinkle 8s linear infinite;
+  pointer-events: none;
+}
+@keyframes twinkle {
+  0% { background-position: 0 0, 50px 50px; }
+  100% { background-position: 60px 60px, 150px 150px; }
+}
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .profile-avatar {
+    top: 10px !important; /* Distance from the top of the screen */
+    right: 30px !important;
+  }
+
+  .profile-avatar img {
+    width: 40px !important; /* Adjust the width */
+    height: 40px !important;
+  }
+
+  .capsule-container {
+    margin: 50px 20px;
+    padding: 20px;
+    height: auto;
+    background: rgba(0, 0, 0, 0.9);
+  }
+
+  #startRec, #stopRec {
+    width: 100%; /* Full width on mobile */
+    z-index: 2;
+  }
+
+  h4 {
+    font-size: 16px;
+    margin-top: 15px;
+  }
+
+  h2 {
+    font-size: 28px; /* Reduce for mobile */
+  }
+}
+
+/* Profile Avatar Section */
+.profile-avatar {
+  position: absolute;
+  top: 40px; /* Default distance from the top of the screen */
+  right: 30px;
+  z-index: 1000;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Styling the avatar image */
+.profile-avatar img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Very small phones (<= 480px) */
+@media (max-width: 480px) {
+  .capsule-container {
+    margin: 30px 12px;
+    padding: 16px;
+    border-radius: 10px;
+  }
+
+  h2 {
+    font-size: 22px;
+    text-align: center;
+    line-height: 1.3;
+  }
+
+  textarea, input, select {
+    font-size: 15px;
+    padding: 10px;
+  }
+
+  button {
+    font-size: 15px;
+    padding: 10px;
+  }
+
+  #recStatus {
+    font-size: 13px;
+  }
+}
+
+/* Medium phones (481px - 640px) */
+@media (min-width: 481px) and (max-width: 640px) {
+  .capsule-container {
+    margin: 40px 16px;
+    padding: 20px;
+  }
+
+  h2 {
+    font-size: 26px;
+  }
+
+  button {
+    font-size: 16px;
+  }
+}
+
+/* Tablets & small landscape devices (641px - 1024px) */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .capsule-container {
+    max-width: 90%;
+    margin: 60px auto;
+    padding: 28px;
+  }
+
+  h2 {
+    font-size: 30px;
+  }
+
+  textarea, input, select {
+    font-size: 16px;
+  }
+}
+/* Profile Avatar Section */
+.profile-avatar {
+    position: absolute; /* Ensure it stays at the top-right corner */
+    top: 40px; /* Distance from the top of the screen */
+    right: 30px; /* Distance from the right edge */
+    z-index: 1000; /* Make sure it stays above other elements */
+    text-align: center; /* Center the avatar inside the container */
+    margin-bottom: 20px; /* Add margin below for spacing */
+}
+
+/* Styling the avatar image */
+.profile-avatar img {
+     width: 80px; /* Adjust the width */
+    height: 80px; /* Adjust the height */
+    border-radius: 50%; /* Make it round */
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.4); /* Add shadow around the avatar */
+    cursor: pointer; /* Show a pointer on hover */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effects */
+}
+
+/* Avatar hover effect */
+.profile-avatar img:hover {
+    transform: scale(1.1); /* Slightly enlarge the avatar on hover */
+    box-shadow: 0 0 12px rgba(255, 204, 153, 0.8); /* Change the box-shadow color and size on hover */
+}
+
+
+  </style>
+</head>
+
+<body>
+  <div class="starry"></div>
+
+  <!-- Video as background -->
+  <video autoplay muted loop>
+    <source src="/assets/textures/earth.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <!-- Profile Avatar Link (at the top-right corner) -->
+<div class="profile-avatar">
+    <a href="{{ url_for('profile') }}">
+        <img id="userAvatarDisplay" 
+             src="{{ url_for('serve_avatar', filename=(data.avatar if data.avatar else 'default_avatar.png')) }}" 
+             alt="Profile Avatar">
+    </a>
+</div>
+
+<div class="overlay"></div>
+  <div class="capsule-container">
+    <h2>⏳ Create Your Time Capsule</h2>
+    <form id="capsuleForm">
+      <input type="text" name="title" placeholder="Title (optional)">
+      <textarea name="letter" rows="6" placeholder="Write your future message..." required></textarea>
+      <label for="openDate">📅 Open this on:</label>
+      <input type="date" id="openDate" name="unlock_date" required>
+
+      <input type="hidden" name="voice_blob" id="voiceBlobInput">
+      <input type="hidden" name="isTimeCapsule" value="1">
+
+      <h4>🎙️ Voice Message (Required)</h4>
+      <button type="button" id="startRec">Start Recording</button>
+      <button type="button" id="stopRec" disabled>Stop Recording</button>
+      <p id="recStatus">Not recording</p>
+      <p id="voiceWarning" style="color: red; display: none;">❌ You must record a voice message to seal the capsule.</p>
+
+
+      <br><br>
+      <button type="submit" id="submitBtn" disabled>💌 Seal Capsule</button>
+    </form>
+  </div>
+<script>
+    const form = document.getElementById('capsuleForm');
+    const submitBtn = document.getElementById('submitBtn');
+    let mediaRecorder;
+    let chunks = [];
+    let isRecordingCompleted = false;
+
+    // Function to check if voice has been recorded
+    function isVoiceRecorded() {
+  console.log("Voice Blob Value:", document.getElementById('voiceBlobInput').value);
+  return document.getElementById('voiceBlobInput').value !== ''; 
+}
+
+    // Handle form submission
+    form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  // Debugging line to check if the voice is recorded
+  console.log("Voice Recorded Check:", isVoiceRecorded());
+
+  if (!isVoiceRecorded()) {
+    alert("❌ You must record a voice message to seal the capsule.");
+    return;
+  } else {
+    // If voice is recorded, allow submission to proceed
+    const formData = new FormData(form);
+    const endpoint = formData.get('voice_blob') ? '/save-voicecapsule' : '/create-letter';
+
+    const res = await fetch(endpoint, { method: 'POST', body: formData });
+    if (res.ok) {
+      alert("✅ Time capsule sealed successfully!");
+      window.location.href = "/saved-letters-page";
+    } else {
+      alert("❌ Failed to save time capsule.");
+    }
+  }
+});
+
+    // Start recording
+    document.getElementById('startRec').onclick = async () => {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      mediaRecorder = new MediaRecorder(stream);
+      chunks = [];
+
+      mediaRecorder.ondataavailable = e => chunks.push(e.data);
+      mediaRecorder.onstop = () => {
+        const blob = new Blob(chunks, { type: 'audio/wav' });
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          document.getElementById('voiceBlobInput').value = reader.result;
+          isRecordingCompleted = true; // Mark recording as completed
+          submitBtn.disabled = false; // Enable the submit button
+          document.getElementById('recStatus').textContent = "✅ Voice recorded.";
+        };
+        reader.readAsDataURL(blob);
+      };
+
+      mediaRecorder.start();
+      document.getElementById('recStatus').textContent = "🎙️ Recording...";
+      document.getElementById('stopRec').disabled = false;
+    };
+
+    // Stop recording
+    document.getElementById('stopRec').onclick = () => {
+      mediaRecorder.stop();
+      alert("Recording stopped."); // Check if it triggers
+      document.getElementById('recStatus').textContent = "✅ Voice recorded.";
+      document.getElementById('stopRec').disabled = true;
+    };
+// Check if the current date is greater than or equal to the open date
+if (currentDate >= openDate) {
+    alert("You can now open your time capsule!");
+} else {
+    alert("This time capsule is locked. Please come back on the set date.");
+}
+
+  </script>
+  
+
+</body>
+</html>
